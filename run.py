@@ -3,7 +3,10 @@ Import gspread to access and update data in our spreadsheet
 """
 
 import gspread
+import pyfiglet
+import pyfiglet.fonts
 from google.oauth2.service_account import Credentials
+from termcolor import colored
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,4 +26,13 @@ ORDER_LIST = SHEET.worksheet("order_list")
 
 data = MENU.get_all_values()
 
-print(data)
+
+def welcome():
+    """
+    Function to display home page
+    """
+    title = "Welcome to the Cafe Beats"
+    print(colored(pyfiglet.figlet_format(title, font="big"), "red"))
+
+
+welcome()
