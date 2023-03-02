@@ -26,6 +26,13 @@ ORDER_LIST = SHEET.worksheet("order_list")
 
 data = MENU.get_all_values()
 
+WELCOME_MSG = """
+Welcome to The Pizza Hub
+Do you want to start your order now?
+[Y] - Yes
+[N] - No
+"""
+
 
 def welcome():
     """
@@ -33,6 +40,7 @@ def welcome():
     """
     title = "Welcome to the Cafe Beats"
     print(colored(pyfiglet.figlet_format(title, font="big"), "red"))
+    print(colored(WELCOME_MSG, "green"))
 
 
 welcome()
