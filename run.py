@@ -103,10 +103,10 @@ def get_user_details():
     user_data.append(user_name)
     user_order_id = random.getrandbits(16)
     user_data.append(user_order_id)
-    if user_name == "":
+    while user_name == "":
         print(colored("\nEnter your name. Name is required\n", "red"))
-    else:
-        print(colored(f"\nWelcome {user_name}!\n", "yellow"))
+        user_name = input("Enter your name:\n")
+    print(colored(f"\nWelcome {user_name}!\n", "yellow"))
     while True:
         delivery_type = input(ORDER_OPTION_MSG).capitalize()
         if delivery_type not in ("D", "P"):
@@ -119,12 +119,12 @@ def get_user_details():
                 colored(f"Selected delivery type is: {order_type}\n", "yellow")
             )
             address = input("Enter your Address:\n")
-            if address == "":
+            while address == "":
                 print(
                     colored("\nEnter your full address.\n", "red")
                 )
-            else:
-                print(
+                address = input("Enter your Address:\n")
+            print(
                     colored(f"\nYour provided address is{address}\n", "yellow")
                 )
             user_data.append(address)
