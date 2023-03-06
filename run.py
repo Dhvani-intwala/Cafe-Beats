@@ -34,7 +34,7 @@ MAX_MENU_ITEM = len(MENU.get_all_values()) - 2
 user_data = []  # Contains user name, user order id, order type and address
 
 WELCOME_MSG = """
-Welcome to The Cafe Beats
+Welcome to The Cafe Beats!
 Do you want to start your order now?
 [Y] - Yes
 [N] - No
@@ -45,7 +45,7 @@ Enter your choice for order type -s
 [P] - For Pickup:
 """
 DISPLAY_MENU_MSG = """
-[Item number] - To add item in your order list.
+Add item by entering item number.
 [P] - To preview your order
 [Q] -  To quit
 """
@@ -79,7 +79,7 @@ def welcome():
     Function to display home page
     """
     title = "Welcome to The Cafe Beats"
-    print(colored(pyfiglet.figlet_format(title, font="big"), "red"))
+    print(colored(pyfiglet.figlet_format(title, font="standard"), "red"))
     print(colored(WELCOME_MSG, "green"))
     while True:
         start_order = input("\nEnter your choice:\n")
@@ -104,7 +104,7 @@ def get_user_details():
     user_order_id = random.getrandbits(16)
     user_data.append(user_order_id)
     while user_name == "":
-        print(colored("\nEnter your name. Name is required\n", "red"))
+        print(colored("\n***Name is required***\n", "red"))
         user_name = input("Enter your name:\n")
     print(colored(f"\nWelcome {user_name}!\n", "yellow"))
     while True:
@@ -121,11 +121,12 @@ def get_user_details():
             address = input("Enter your Address:\n")
             while address == "":
                 print(
-                    colored("\nEnter your full address.\n", "red")
+                    colored("\n***Enter your full address.***\n", "red")
                 )
                 address = input("Enter your Address:\n")
             print(
-                    colored(f"\nYour provided address is{address}\n", "yellow")
+                    colored
+                    (f"\nYour provided address is: {address}\n", "yellow")
                 )
             user_data.append(address)
         elif delivery_type == "P":
@@ -137,10 +138,12 @@ def get_user_details():
             user_data.append("The Cafe Beats")
 
         print(colored("\nLoading menu...", "green"))
-        sleep(5)
+        sleep(2)
         clear_screen()
         display_menu_list()
         break
+    else:
+        print(colored("\n***Invalid input.***\n", "red"))
 
 
 def display_menu_list():
@@ -151,6 +154,58 @@ def display_menu_list():
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
+    user_action()
+
+
+def user_action():
+    """
+    Display user action after getting the menu items.
+    """
+    item_number = 0
+    while True:
+        food_item = input("Please enter a valid input: ")
+        if food_item.isdigit():
+            food_item = int(food_item)
+            if food_item >= 1 and food_item <= (MAX_MENU_ITEM):
+                item_number = food_item
+                add_item(item_number)
+                print(
+                    colored(
+                        "\nSelected item added to your order list.", "yellow"
+                    )
+                )
+            else:
+                print(
+                    colored(
+                        "\n**Selected item doesn't exist in the menu**.\n",
+                        "red"
+                    )
+                )
+        elif food_item.capitalize() == "P":
+            if item_number == 0:
+                print(colored(
+                    "Your order list is empty. please add an item.\n",
+                    "red")
+                )
+            else:
+                print(colored("\nLoading preview page....", "green"))
+                sleep(2)
+                clear_screen()
+                break
+        elif food_item.capitalize() == "Q":
+            print(colored("\nThanks for visiting us!\n", "yellow"))
+            sleep(2)
+            clear_screen()
+            break      
+
+
+def add_item(item_number):
+    """
+    Appends user data, order data and order status in google sheets worksheet
+    """
+    cell = MENU.find(str(item_number))
+    order_row = user_data + MENU.row_values(cell.row) + ["Processing"]
+    ORDER_LIST.append_row(order_row)
 
 
 welcome()
