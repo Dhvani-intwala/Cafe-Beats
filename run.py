@@ -35,6 +35,7 @@ user_data = []  # Contains user name, user order id, order type and address
 
 WELCOME_MSG = """
 Welcome to The Cafe Beats!
+
 Do you want to start your order now?
 [Y] - Yes
 [N] - No
@@ -82,7 +83,7 @@ def welcome():
     print(colored(pyfiglet.figlet_format(title, font="standard"), "red"))
     print(colored(WELCOME_MSG, "green"))
     while True:
-        start_order = input("\nEnter your choice:\n")
+        start_order = input("\nPlease enter a valid input:\n")
         if start_order.capitalize() == "Y":
             get_user_details()
             break
@@ -93,57 +94,63 @@ def welcome():
             print(colored("Invaild input.Enter Y to start.\n", "red"))
 
 
+def take_user_name_input():
+    user_name = input("Enter your name:\n")
+    if user_name == "":
+        print(colored("\n***Name is required***\n", "red"))
+        return take_user_name_input()
+    return user_name
+
+def take_order_type_input():
+    order_type = input(ORDER_OPTION_MSG).capitalize()
+    if order_type not in ("D", "P"):
+        print(colored("\nInvalid delivery type. Try again.\n", "red"))
+        return take_order_type_input()
+    
+    if order_type == "D":
+        return "Home delivery"
+    elif order_type == "P":
+        return "Pickup"
+
+def take_address_input():
+    address = input("Enter your Address:\n")
+    if address == "":
+        print(
+            colored("\n***Enter your full address.***\n", "red")
+        )
+        return take_address_input()
+    return address
+        
+
 def get_user_details():
     """
     Gets user details like user name, order type, address and
     appends them in user data list along with user order Id
     """
     user_data.clear()
-    user_name = input("Enter your name:\n")
+    user_name = take_user_name_input()
     user_data.append(user_name)
     user_order_id = random.getrandbits(16)
     user_data.append(user_order_id)
-    while user_name == "":
-        print(colored("\n***Name is required***\n", "red"))
-        user_name = input("Enter your name:\n")
     print(colored(f"\nWelcome {user_name}!\n", "yellow"))
-    while True:
-        delivery_type = input(ORDER_OPTION_MSG).capitalize()
-        if delivery_type not in ("D", "P"):
-            print(colored("\nInvalid delivery type. Try again.\n", "red"))
-            continue
-        if delivery_type == "D":
-            order_type = "Home delivery"
-            user_data.append(order_type)
-            print(
-                colored(f"Selected delivery type is: {order_type}\n", "yellow")
+    order_type = take_order_type_input()
+    user_data.append(order_type)
+    print(
+        colored(f"Selected delivery type is: {order_type}\n", "yellow")
+    ) 
+    if order_type == "Home delivery":
+        address = take_address_input()
+        print(
+                colored
+                (f"\nYour provided address is: {address}\n", "yellow")
             )
-            address = input("Enter your Address:\n")
-            while address == "":
-                print(
-                    colored("\n***Enter your full address.***\n", "red")
-                )
-                address = input("Enter your Address:\n")
-            print(
-                    colored
-                    (f"\nYour provided address is: {address}\n", "yellow")
-                )
-            user_data.append(address)
-        elif delivery_type == "P":
-            order_type = "Pickup"
-            user_data.append(order_type)
-            print(
-                colored(f"\nSelected delivery type is: {order_type}", "yellow")
-                )
-            user_data.append("The Cafe Beats")
-
-        print(colored("\nLoading menu...", "green"))
-        sleep(2)
-        clear_screen()
-        display_menu_list()
-        break
-    else:
-        print(colored("\n***Invalid input.***\n", "red"))
+        user_data.append(address)
+    elif order_type == "Pickup":
+        user_data.append("The Cafe Beats")
+    print(colored("\nLoading menu...", "green"))
+    sleep(2)
+    clear_screen()
+    display_menu_list()
 
 
 def display_menu_list():
@@ -166,6 +173,7 @@ def user_action():
         food_item = input("Please enter a valid input: ")
         if food_item.isdigit():
             food_item = int(food_item)
+            # Validates and adds the item to the order list
             if food_item >= 1 and food_item <= (MAX_MENU_ITEM):
                 item_number = food_item
                 add_item(item_number)
@@ -182,6 +190,8 @@ def user_action():
                     )
                 )
         elif food_item.capitalize() == "P":
+            # when user enter 'P' without adding an item
+            # item_number is used to display order list empty message
             if item_number == 0:
                 print(colored(
                     "Your order list is empty. please add an item.\n",
@@ -193,6 +203,7 @@ def user_action():
                 clear_screen()
                 break
         elif food_item.capitalize() == "Q":
+            # when user enter 'Q' then open thank you message.
             print(colored("\nThanks for visiting us!\n", "yellow"))
             sleep(2)
             clear_screen()
@@ -201,7 +212,7 @@ def user_action():
 
 def add_item(item_number):
     """
-    Appends user data, order data and order status in google sheets worksheet
+    Appends user data, order data and order status in google sheets worksheet.
     """
     cell = MENU.find(str(item_number))
     order_row = user_data + MENU.row_values(cell.row) + ["Processing"]
