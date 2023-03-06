@@ -95,24 +95,34 @@ def welcome():
 
 
 def take_user_name_input():
+    """
+    Function to take name input.
+    """
     user_name = input("Enter your name:\n")
     if user_name == "":
         print(colored("\n***Name is required***\n", "red"))
         return take_user_name_input()
     return user_name
 
+
 def take_order_type_input():
+    """
+    Function to take order type input.
+    """
     order_type = input(ORDER_OPTION_MSG).capitalize()
     if order_type not in ("D", "P"):
         print(colored("\nInvalid delivery type. Try again.\n", "red"))
         return take_order_type_input()
-    
     if order_type == "D":
         return "Home delivery"
     elif order_type == "P":
         return "Pickup"
 
+
 def take_address_input():
+    """
+    Function to take address input.
+    """
     address = input("Enter your Address:\n")
     if address == "":
         print(
@@ -120,7 +130,7 @@ def take_address_input():
         )
         return take_address_input()
     return address
-        
+
 
 def get_user_details():
     """
@@ -137,7 +147,7 @@ def get_user_details():
     user_data.append(order_type)
     print(
         colored(f"Selected delivery type is: {order_type}\n", "yellow")
-    ) 
+    )
     if order_type == "Home delivery":
         address = take_address_input()
         print(
@@ -207,7 +217,7 @@ def user_action():
             print(colored("\nThanks for visiting us!\n", "yellow"))
             sleep(2)
             clear_screen()
-            break      
+            break
 
 
 def add_item(item_number):
