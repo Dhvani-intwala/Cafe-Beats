@@ -38,3 +38,16 @@ The Cafe beats website has been developed to provide users the chance to order f
 9. [Deployment](#deployment)
 10. [Credits](#credits)
 11. [Acknowledgements](#acknowledgements)
+
+
+## Project Goals
+
+### User Goals
+- Be able to easily interact with the app to order food for    pick up or home delivery.
+- Navigate the app seamlessly.
+- Receive clear instructions on their current input options.
+- Be able to add and remove items from an order prior to order confirmation.
+- Be able to cancel the order.
+- The ability to preview their order.
+- Be able to quit the app from any page.
+
