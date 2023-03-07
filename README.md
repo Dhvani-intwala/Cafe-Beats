@@ -51,3 +51,14 @@ The Cafe beats website has been developed to provide users the chance to order f
 - The ability to preview their order.
 - Be able to quit the app from any page.
 
+### Site Owner Goals
+
+- Provide potential customers an easy-to-use app to order food from the cafe beats.
+- To save the user information and order data to a Google Sheets worksheet.
+
+## User Experience
+
+### Target Audience
+
+- People looking to have food ordered for delivery.
+- People looking to pick up food from the store.
