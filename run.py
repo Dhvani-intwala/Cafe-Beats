@@ -50,6 +50,12 @@ Add item by entering item number.
 [P] - To preview your order
 [Q] -  To quit
 """
+PREVIEW_TEXT = """
+[R] - To remove an item
+[A] - To add an item
+[C] - To confirm order
+[Q] - To quit
+"""
 
 
 def clear_screen():
@@ -229,4 +235,20 @@ def add_item(item_number):
     ORDER_LIST.append_row(order_row)
 
 
-welcome()
+def get_individual_user_data():
+    """
+    Get individual user's order data from worksheet
+    'order_list' with unique order Id   
+    """
+    individual_user_data = []
+    for row in ORDER_LIST.get_all_values():
+        for item in row:
+            if item == str(user_data[1]):
+                row.pop(7)  # to remove order status
+                del row[0:4]  # to remove user data
+                individual_user_data.append(row)
+    return individual_user_data
+
+
+if __name__ == "__main__":
+    welcome()
