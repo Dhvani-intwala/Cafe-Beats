@@ -21,7 +21,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('Cafe Beats')
+SHEET = GSPREAD_CLIENT.open('Cafe_Beats')
 
 # To acces the worksheets in google sheets
 MENU = SHEET.worksheet("menu")
@@ -29,9 +29,16 @@ ORDER_LIST = SHEET.worksheet("order_list")
 
 MAX_MENU_ITEM = len(MENU.get_all_values()) - 2
 
+# Order receipt constants
+DELIVERY_CHARGE = 5
+DELIVERY_TIME = 30
+PICKUP_TIME = 15
 
 # Global variables
 user_data = []  # Contains user name, user order id, order type and address
+order_data = []  # Contains item number, item name, item price
+# Contains item number, item name, item price for specific user order id
+global_individual_user_data = []
 
 WELCOME_MSG = """
 Welcome to The Cafe Beats!
@@ -217,6 +224,7 @@ def user_action():
                 print(colored("\nLoading preview page....", "green"))
                 sleep(2)
                 clear_screen()
+                preview_order()
                 break
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
@@ -238,7 +246,7 @@ def add_item(item_number):
 def get_individual_user_data():
     """
     Get individual user's order data from worksheet
-    'order_list' with unique order Id   
+    'order_list' with unique order id
     """
     individual_user_data = []
     for row in ORDER_LIST.get_all_values():
@@ -250,5 +258,43 @@ def get_individual_user_data():
     return individual_user_data
 
 
-if __name__ == "__main__":
-    welcome()
+def append_order_status(order_request):
+    """
+    Update order status in worksheet 'order_list'
+    when user Confirms / Cancels the order
+    """
+    cells_list = ORDER_LIST.findall(str(user_data[1]))
+    for cell in cells_list:
+        # Locating cell for order status corresponding to order id
+        confirmation_cell = "H" + str(cell.row)
+        if order_request.capitalize() == "C":
+            ORDER_LIST.update(confirmation_cell, "Confirmed")
+        elif order_request.capitalize() == "Q":
+            ORDER_LIST.update(confirmation_cell, "Cancelled")
+
+
+def preview_order():
+    """
+    Previews user's order list
+    """
+    local_user_data = get_individual_user_data()
+    i = True
+    while True:
+        # Tabulate order list when function is called first time
+        if i:
+            print(colored("----------Order Preview----------\n", "yellow"))
+            tabulate_data(local_user_data)
+            print(PREVIEW_TEXT)
+            i = False
+        preview_option = input("Please enter a valid input: ")
+        # Evaluating user input for digit and character
+        if preview_option.isdigit():
+            preview_option = int(preview_option)
+
+
+def remove_item():
+    """
+    """
+
+
+welcome()
