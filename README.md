@@ -62,3 +62,10 @@ The Cafe beats website has been developed to provide users the chance to order f
 
 - People looking to have food ordered for delivery.
 - People looking to pick up food from the store.
+
+### User Requirements and Expectations
+
+- The ability to seamlessly navigate through the app.
+- To have a well organized menu.
+- To have a easy ordering process.
+- To have validation that inputs have been successfully entered.

@@ -55,11 +55,7 @@ Enter your choice for order type -s
 DISPLAY_MENU_MSG = """
 Add item by entering item number.
 [P] - To preview your order
-[Q] -  To quit
-"""
-PREVIEW_TEXT = """
 [R] - To remove an item
-[A] - To add an item
 [C] - To confirm order
 [Q] - To quit
 """
@@ -115,7 +111,8 @@ def take_user_name_input():
     if user_name == "":
         print(colored("\n***Name is required***\n", "red"))
         return take_user_name_input()
-    return user_name
+    clear_screen()
+    return print(pyfiglet.figlet_format(f'Hi {user_name}', font="standard"))
 
 
 def take_order_type_input():
@@ -155,7 +152,6 @@ def get_user_details():
     user_data.append(user_name)
     user_order_id = random.getrandbits(16)
     user_data.append(user_order_id)
-    print(colored(f"\nWelcome {user_name}!\n", "yellow"))
     order_type = take_order_type_input()
     user_data.append(order_type)
     print(
@@ -200,11 +196,6 @@ def user_action():
             if food_item >= 1 and food_item <= (MAX_MENU_ITEM):
                 item_number = food_item
                 add_item(item_number)
-                print(
-                    colored(
-                        "\nSelected item added to your order list.", "yellow"
-                    )
-                )
             else:
                 print(
                     colored(
@@ -226,6 +217,17 @@ def user_action():
                 clear_screen()
                 preview_order()
                 break
+        elif food_item.capitalize() == "R":
+            if len(order_data) == 0:
+                clear_screen()
+                print(display_menu_list)
+                print(colored('\nNothing to remove, basket'
+                              ' is empty', 'yellow'))
+                user_action()
+                break
+            else:
+                remove_item()
+            break
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
             print(colored("\nThanks for visiting us!\n", "yellow"))
@@ -280,21 +282,70 @@ def preview_order():
     local_user_data = get_individual_user_data()
     i = True
     while True:
-        # Tabulate order list when function is called first time
         if i:
             print(colored("----------Order Preview----------\n", "yellow"))
             tabulate_data(local_user_data)
-            print(PREVIEW_TEXT)
             i = False
-        preview_option = input("Please enter a valid input: ")
-        # Evaluating user input for digit and character
+        preview_option = input(colored(
+                '\nPlease press [Y] to return to the order page.\n', 'yellow'))
+        preview_option = preview_option.capitalize()
+        if preview_option == 'Y':
+            clear_screen()
+            display_menu_list()
+        else:
+            clear_screen()
+            print(colored(
+                '\nPlease enter "Y"'' to return to order screen.', 'yellow'))
+            return preview_option
+
         if preview_option.isdigit():
             preview_option = int(preview_option)
+        if preview_option.isdigit():
+            preview_option = int(preview_option)
+            if (preview_option) >= 1 and (preview_option) <= MAX_MENU_ITEM:
+                local_user_data = get_individual_user_data()
+                clear_screen()
+                tabulate_data(local_user_data)
+            else:
+                print(colored("\nInvalid item number\n", "red"))
+        elif preview_option.capitalize() == "A":
+            print(colored("\nLoading menu page....", "green"))
+            sleep(2)
+            clear_screen()
+            display_menu_list()
+            break
+        elif preview_option.capitalize() == "C":
+            local_user_data = get_individual_user_data()
+            # Evaluating order list whether empty or not
+            if bool(local_user_data):
+                append_order_status(preview_option)
+                print(colored("\nLoading reciept....", "green"))
+                sleep(2)
+                clear_screen()
+                break
+            else:
+                print(colored("\nNo item in the order list", "red"))
+        elif preview_option.capitalize() == "Q":
+            append_order_status(preview_option)
+            print(colored("\nThanks for visiting us!", "green"))
+            sleep(2)
+            clear_screen()
+            break
+        else:
+            print(colored("\nInvalid input\n", "red"))
 
 
 def remove_item():
     """
+    Function to pop the last item from the order list.
     """
+    clear_screen()
+    print(display_menu_list)
+    removed_item = order_data[-1]
+    print(colored(
+        f'\nYou have removed {removed_item[1]}'' from your order.', 'yellow'))
+    order_data.pop()
+    user_action()
 
 
 welcome()
