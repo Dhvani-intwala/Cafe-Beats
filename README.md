@@ -69,3 +69,17 @@ The Cafe beats website has been developed to provide users the chance to order f
 - To have a well organized menu.
 - To have a easy ordering process.
 - To have validation that inputs have been successfully entered.
+
+### User stories
+
+-  As a user, I want to be provided with clear instructions throughout the app.
+- As a user, I want to be able to choose between order pick up or delivery.
+- As a user, I want to be able to view the menu.
+- As a user, I want to be able to add items to my order.
+- As a user, I want to be able to remove items from my order.
+- As a user, I want to be able to preview an order.
+- As a user, I want to be able to cancel an unplaced order.
+- As a user, I want to be able to place an order.
+- As a user, I want to be shown a receipt.
+- As a user, I want to be able to exit the app.
+
