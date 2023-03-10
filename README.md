@@ -90,3 +90,18 @@ The Cafe beats website has been developed to provide users the chance to order f
 - As a site owner, I would want users to get feedback based on their input.
 
 
+
+
+
+## Acknowledgements
+
+I would like to also thank the following:
+
+- My Code Institute mentor Mr Akshat Garg for his guidance through this project.
+- My fellow Code Institute students from whom I got the project idea.
+- My Brother for his support in debugging.
+- Code Institute tutor support who helped me with different issues while doing the project.
+
+[Back to Top](#the-cafe-beats)
+
+

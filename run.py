@@ -41,8 +41,6 @@ order_data = []  # Contains item number, item name, item price
 global_individual_user_data = []
 
 WELCOME_MSG = """
-Welcome to The Cafe Beats!
-
 Do you want to start your order now?
 [Y] - Yes
 [N] - No
