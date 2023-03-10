@@ -2,9 +2,12 @@
 
 ### Developer: Dhvani Intwala
 
+![Mockup-screenshot-image](Screenshot-of-the-mockup-image.png)
+
 The Cafe beats website has been developed to provide users the chance to order food for delivery or pick-up via a command line based interface.
 
 [View live website]()
+
 
 # Table of Contents
 
