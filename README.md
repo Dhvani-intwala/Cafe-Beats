@@ -83,3 +83,10 @@ The Cafe beats website has been developed to provide users the chance to order f
 - As a user, I want to be shown a receipt.
 - As a user, I want to be able to exit the app.
 
+### Site Owner Stories
+
+- As a site owner, I would want users to be greeted with a welcome message to give a friendly feel to the app.
+- As a site owner, I would want to save the user information and order data to a Google Sheets file.
+- As a site owner, I would want users to get feedback based on their input.
+
+
