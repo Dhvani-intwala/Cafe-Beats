@@ -188,10 +188,24 @@ def user_action():
     item_number = 0
     while True:
         food_item = input("Please enter a valid input: ")
-        if food_item.isdigit():
-            food_item = int(food_item)
-            # Validates and adds the item to the order list
-            if food_item >= 1 and food_item <= (MAX_MENU_ITEM):
+        if food_item.isdigit() and int(food_item) > 0:
+            try:
+                food_item = int(food_item)
+                clear_screen()
+                # display_menu_list()
+                display_menu = MENU.get_all_values()
+                print(tabulate(display_menu))
+                print(DISPLAY_MENU_MSG)
+                order_data.append(food_item)
+                print("You ordered: ", order_data)
+                item_number += 1
+                # food_item = input('Please enter a valid input: ')
+            except IndexError:
+                clear_screen()
+                print(colored(
+                    f'\nIm sorry Item "{food_item + 1}" does not exist.'
+                    ' Please enter a valid item number', 'yellow')) 
+            if (food_item >= 0 and food_item < 20):
                 item_number = food_item
                 add_item(item_number)
             else:
@@ -342,7 +356,7 @@ def remove_item():
     removed_item = order_data[-1]
     print(colored(
         f'\nYou have removed {removed_item[1]}'' from your order.', 'yellow'))
-    order_data.pop()
+    order_data.pop() 
     user_action()
 
 
