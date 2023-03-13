@@ -170,7 +170,7 @@ def get_user_details():
     display_menu_list()
 
 
-def display_menu_list():
+def display_menu_list(is_useraction_required=0):
     """
     Fetches the cafe beats menu from google sheets worksheet 'menu' and
     displays it in formatted table form to user.
@@ -178,7 +178,11 @@ def display_menu_list():
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
-    user_action()
+
+    if (is_useraction_required == 0):
+        user_action()
+    else:
+        print("You ordered: ", order_data)
 
 
 def user_action():
@@ -193,19 +197,20 @@ def user_action():
                 food_item = int(food_item)
                 clear_screen()
                 # display_menu_list()
-                display_menu = MENU.get_all_values()
-                print(tabulate(display_menu))
-                print(DISPLAY_MENU_MSG)
+                # display_menu = MENU.get_all_values()
+                # print(tabulate(display_menu))
+                # print(DISPLAY_MENU_MSG)
                 order_data.append(food_item)
-                print("You ordered: ", order_data)
+                display_menu_list(1)
+                # print("You ordered: ", order_data)
                 item_number += 1
                 # food_item = input('Please enter a valid input: ')
             except IndexError:
                 clear_screen()
                 print(colored(
                     f'\nIm sorry Item "{food_item + 1}" does not exist.'
-                    ' Please enter a valid item number', 'yellow')) 
-            if (food_item >= 0 and food_item < 20):
+                    ' Please enter a valid item number', 'yellow'))
+            if (food_item >= 0 and food_item <= 20):
                 item_number = food_item
                 add_item(item_number)
             else:
@@ -227,19 +232,18 @@ def user_action():
                 print(colored("\nLoading preview page....", "green"))
                 sleep(2)
                 clear_screen()
-                preview_order()
-                break
+                preview_order()      
         elif food_item.capitalize() == "R":
             if len(order_data) == 0:
                 clear_screen()
                 print(display_menu_list)
                 print(colored('\nNothing to remove, basket'
                               ' is empty', 'yellow'))
-                user_action()
-                break
             else:
                 remove_item()
-            break
+            # break
+        # elif food_item.capitalize() == "C":
+        #     add_item(item_number)
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
             print(colored("\nThanks for visiting us!\n", "yellow"))
@@ -303,7 +307,8 @@ def preview_order():
         preview_option = preview_option.capitalize()
         if preview_option == 'Y':
             clear_screen()
-            display_menu_list()
+            display_menu_list(1)
+            return
         else:
             clear_screen()
             print(colored(
@@ -329,20 +334,14 @@ def preview_order():
         elif preview_option.capitalize() == "C":
             local_user_data = get_individual_user_data()
             # Evaluating order list whether empty or not
-            if bool(local_user_data):
-                append_order_status(preview_option)
-                print(colored("\nLoading reciept....", "green"))
+            if len(order_data) == 0:
+                clear_screen()
+                print(display_menu_list())
+                print(colored('\nCannot complete order,'
+                              ' basket is empty.', 'red'))
                 sleep(2)
                 clear_screen()
                 break
-            else:
-                print(colored("\nNo item in the order list", "red"))
-        elif preview_option.capitalize() == "Q":
-            append_order_status(preview_option)
-            print(colored("\nThanks for visiting us!", "green"))
-            sleep(2)
-            clear_screen()
-            break
         else:
             print(colored("\nInvalid input\n", "red"))
 
@@ -354,10 +353,35 @@ def remove_item():
     clear_screen()
     print(display_menu_list)
     removed_item = order_data[-1]
-    print(colored(
-        f'\nYou have removed {removed_item[1]}'' from your order.', 'yellow'))
-    order_data.pop() 
-    user_action()
+    remove_str = f'\nYou have removed {0} from your order'.format(removed_item)
+    print(colored(remove_str, 'yellow'))
+    order_data.pop()
+    clear_screen()
+    display_menu_list(1)
+    return
+    # user_action()
+
+
+def complete_order():
+    """
+    Function to complete order and pass arguments to
+    Order class and its functions.    
+    """
+    order_time = datetime.now() + timedelta(hours=1)
+    order_time = order_time.strftime("%H:%M:%S %Y-%m-%d")
+    
+
+def thank_you():
+    """
+    Function to display thank you message
+    """
+    title = 'Thanks for Visiting!'
+    print(pyfiglet.figlet_format(title))
+    print('\nCreated by Dhvani Intwala'
+            '\n\nGitHub - '
+            'https://github.com/Dhvani-intwala'
+            '\n\nLinkedIn -'
+            'https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n')
 
 
 welcome()

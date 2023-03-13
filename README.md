@@ -93,8 +93,16 @@ The Cafe beats website has been developed to provide users the chance to order f
 - As a site owner, I would want users to get feedback based on their input.
 
 
+## Credits
 
+I used following resources during the project development:
 
+- For Gspreds functions for retrieving and updating the data from and to google sheets [Gspread Documents](https://docs.gspread.org/en/latest/user-guide.html)
+
+- For finding common elements in two lists using sets  
+    https://www.geeksforgeeks.org/python-print-common-elements-two-lists
+
+- A tutorial on the use of the tabulate module for displaying table data from pyeng.io was used - [Tabulate](https://pyneng.readthedocs.io/en/latest/book/12_useful_modules/tabulate.html)
 
 ## Acknowledgements
 
