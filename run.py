@@ -3,6 +3,7 @@ Import gspread to access and update data in our spreadsheet
 """
 import os
 from time import sleep
+from datetime import datetime, timedelta
 import random
 import gspread
 import pyfiglet
@@ -178,11 +179,11 @@ def display_menu_list(is_useraction_required=0):
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
-
     if (is_useraction_required == 0):
         user_action()
     else:
-        print("You ordered: ", order_data)
+        print(
+            'You ordered Item ', order_data)
 
 
 def user_action():
@@ -196,10 +197,6 @@ def user_action():
             try:
                 food_item = int(food_item)
                 clear_screen()
-                # display_menu_list()
-                # display_menu = MENU.get_all_values()
-                # print(tabulate(display_menu))
-                # print(DISPLAY_MENU_MSG)
                 order_data.append(food_item)
                 display_menu_list(1)
                 # print("You ordered: ", order_data)
@@ -232,7 +229,7 @@ def user_action():
                 print(colored("\nLoading preview page....", "green"))
                 sleep(2)
                 clear_screen()
-                preview_order()      
+                preview_order()
         elif food_item.capitalize() == "R":
             if len(order_data) == 0:
                 clear_screen()
@@ -241,15 +238,24 @@ def user_action():
                               ' is empty', 'yellow'))
             else:
                 remove_item()
-            # break
-        # elif food_item.capitalize() == "C":
-        #     add_item(item_number)
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
             print(colored("\nThanks for visiting us!\n", "yellow"))
             sleep(2)
             clear_screen()
             break
+        elif food_item.capitalize() == "C":
+            local_user_data = get_individual_user_data()
+            # Evaluating order list whether empty or not
+            if bool(local_user_data):
+                append_order_status(food_item)
+                print(colored("\nLoading reciept....", "green"))
+                sleep(2)
+                clear_screen()
+                complete_order()
+                break
+        else:
+            print(colored("\nInvalid input\n", "red"))
 
 
 def add_item(item_number):
@@ -311,8 +317,11 @@ def preview_order():
             return
         else:
             clear_screen()
-            print(colored(
-                '\nPlease enter "Y"'' to return to order screen.', 'yellow'))
+            print(
+                colored
+                (
+                    '\nPlease enter "Y"'' to return to order screen.',
+                    'yellow'))
             return preview_option
 
         if preview_option.isdigit():
@@ -325,25 +334,6 @@ def preview_order():
                 tabulate_data(local_user_data)
             else:
                 print(colored("\nInvalid item number\n", "red"))
-        elif preview_option.capitalize() == "A":
-            print(colored("\nLoading menu page....", "green"))
-            sleep(2)
-            clear_screen()
-            display_menu_list()
-            break
-        elif preview_option.capitalize() == "C":
-            local_user_data = get_individual_user_data()
-            # Evaluating order list whether empty or not
-            if len(order_data) == 0:
-                clear_screen()
-                print(display_menu_list())
-                print(colored('\nCannot complete order,'
-                              ' basket is empty.', 'red'))
-                sleep(2)
-                clear_screen()
-                break
-        else:
-            print(colored("\nInvalid input\n", "red"))
 
 
 def remove_item():
@@ -365,11 +355,71 @@ def remove_item():
 def complete_order():
     """
     Function to complete order and pass arguments to
-    Order class and its functions.    
+    Order class and its functions
     """
-    order_time = datetime.now() + timedelta(hours=1)
-    order_time = order_time.strftime("%H:%M:%S %Y-%m-%d")
-    
+    # Display user data
+    print(colored("****Your Reciept****\n", "yellow"))
+    print(f"User name: {user_data[0]}")
+    print(f"Order Id: {user_data[1]}")
+    print(f"Order type: {user_data[2]}")
+    print(f"Address: {user_data[3]}")
+    # Display date & time for order receipt
+    order_time = datetime.now()
+    delivery_time = order_time + timedelta(minutes=DELIVERY_TIME)
+    pickup_time = order_time + timedelta(minutes=PICKUP_TIME)
+    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
+    delivery_time = delivery_time.strftime("%H:%M:%S  %d-%m-%Y")
+    pickup_time = pickup_time.strftime("%H:%M:%S  %d-%m-%Y")
+    print(f"Order time: {order_time}\n")
+    total_price = 0  # initialize total price
+    local_user_data = get_individual_user_data()
+    # Calculating total price for order receipt
+    for item in local_user_data:
+        price = float(item[2].split('€')[1])
+        total_price += price
+        display_total_price = "€" + str(round(total_price, 2))
+    tabulate_data(local_user_data)
+    if user_data[2] == "Home delivery":
+        print(
+            colored(
+                f"\nDelivey Charge: €{float(DELIVERY_CHARGE):.2f}", "yellow"
+            )
+        )
+        display_total_price = "€" + str(total_price + DELIVERY_CHARGE)
+        print(
+            colored(
+                f"Total price of your order: {display_total_price}", "yellow"
+            )
+        )
+    else:
+        print(
+            colored(
+                f"\nTotal price of your order: {display_total_price}", "yellow"
+            )
+        )
+    if user_data[2] == "Home delivery":
+        print(
+            colored(
+                f"Your order will be delivered at {delivery_time}\n", "yellow"
+            )
+        )
+    else:
+        print(
+            colored(
+                f"Your order will be ready for Pickup at {pickup_time}",
+                "yellow",
+            )
+        )
+    print(colored("\nThanks for your order. Enjoy your meal!", "green"))
+    while True:
+        end = input("\nEnter Q to quit:\n")
+        if end.capitalize() == "Q":
+            clear_screen()
+            thank_you()
+            sleep(2)
+            clear_screen()
+            break
+
 
 def thank_you():
     """
@@ -378,10 +428,11 @@ def thank_you():
     title = 'Thanks for Visiting!'
     print(pyfiglet.figlet_format(title))
     print('\nCreated by Dhvani Intwala'
-            '\n\nGitHub - '
-            'https://github.com/Dhvani-intwala'
-            '\n\nLinkedIn -'
-            'https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n')
+          '\nGitHub -'
+          'https://github.com/Dhvani-intwala'
+          '\n\nLinkedIn -'
+          'https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n')
 
 
-welcome()
+if __name__ == "__main__":
+    welcome()
