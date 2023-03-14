@@ -92,6 +92,86 @@ The Cafe beats website has been developed to provide users the chance to order f
 - As a site owner, I would want to save the user information and order data to a Google Sheets file.
 - As a site owner, I would want users to get feedback based on their input.
 
+## Deployment
+This project was deployed to Heroku with following steps:
+1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
+2. Navigate to https://www.heroku.com/ and login or create an account. 
+3. Click the "new" button in the upper right corner and select "create new app".
+<details>
+<summary>Screenshot</summary>
+<img src="new-app.png">
+</details>
+
+4. Choose an app name and your region and click "Create app".
+<details>
+<summary>Screenshot</summary>
+<img src="app-name.png">
+</details>
+
+5. Under Config Vars store any sensitive data you saved in .json file. Name 'Key' field, copy the .json file and paste it to 'Value' field. Also add a key 'PORT' and value '8000'.
+<details>
+<summary>Screenshot</summary>
+<img src="config-var.png">
+</details>
+
+6. Go to the "settings" tab, add the Python build pack and then the node.js build pack (please note they need to be in the correct order of Python above node.js).
+
+<details>
+<summary>Screenshot</summary>
+<img src="App-information.png">
+</details>
+
+<details>
+<summary>Screenshot</summary>
+<img src="Add-buildpack1.png">
+</details
+
+<details>
+<summary>Screenshot</summary>
+<img src="buildpack.png">
+</details>
+
+7. Go to the "deploy" tab and pick GitHub as a deployment method.
+<details>
+<summary>Screenshot</summary>
+<img src="deploy-method.png">
+</details>
+
+8. Search for a repository to connect to and select the branch you would like to build the app from.
+<details>
+<summary>Screenshot</summary>
+<img src="manual-deploy.png">
+</details>
+
+9. If preferred enable automatic deploys and then deploy branch.
+Wait for the app to build and then click on the "View" link which will redirect you to the deployed link.
+
+
+### Forking the GitHub Repository
+
+We can make a copy of the original repository on our GitHub account to view or make changes too without affecting the original repository, this is known as forking. Forking in GitHub can be done via the following steps:
+
+1. Navigate to www.github.com and log in.
+2. Once logged in navigate to the desired [GitHub Repository](https://github.com/jkingportfolio/CI_PP3_Taco_Trailer) that you would like to fork.
+3. At the top right corner of the page click on the fork icon.
+4. There should now be a copy of your original repository in your GitHub account.
+
+Please note if you are not a member of an organisation on GitHub then you will not be able to fork your own repository.
+
+### Clone a GitHub Repository
+
+You can make a local clone of a repository via the following steps: 
+
+1. Navigate to www.github.com and log in.
+2. Once logged in navigate to the desired [GitHub Repository](https://github.com/jkingportfolio/CI_PP3_Taco_Trailer) that you would like to clone.
+3. Locate the code button at the top, above the repository file structure.
+4. Select the preferred clone method from HTTPS. SSH or GitHub CLI then click the copy button to copy the URL to your clipboard.
+5. Open Git Bash
+6. Update the current working direction to the location in which you would like the clone directory to be created.
+7. Type `git clone` and paste the previously copied URL at Step 4.
+8. `$ clone https://github.com/jkingportfolio/CI_PP3_Taco_Trailer`
+9. Now press enter and the local clone will be created at the desired local location
+
 
 ## Credits
 
