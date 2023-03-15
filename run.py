@@ -207,7 +207,7 @@ def user_action():
                 print(colored(
                     f'\nIm sorry Item "{food_item + 1}" does not exist.'
                     ' Please enter a valid item number', 'yellow'))
-            if (food_item >= 0 and food_item <= 20):
+            if (food_item >= 1 and food_item <= 20):
                 item_number = food_item
                 add_item(item_number)
             else:
@@ -217,6 +217,7 @@ def user_action():
                         "red"
                     )
                 )
+                continue
         elif food_item.capitalize() == "P":
             # when user enter 'P' without adding an item
             # item_number is used to display order list empty message

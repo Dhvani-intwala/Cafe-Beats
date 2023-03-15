@@ -110,6 +110,7 @@ Description: On the Welcome page users are asked if you would like to make an or
 - Yes
 - No
 
+Operation: when user select yes then the user is asked to Enter his name. when user select no then thanks for visting us! page appears.
 
 
 
