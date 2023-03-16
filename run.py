@@ -217,6 +217,7 @@ def user_action():
                         "red"
                     )
                 )
+                order_data.pop()
                 continue
         elif food_item.capitalize() == "P":
             # when user enter 'P' without adding an item
