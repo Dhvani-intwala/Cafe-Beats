@@ -427,7 +427,7 @@ def delivery_time():
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
     order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
 
-    if delivery_time()
+    if delivery_time():
 
 def total_order_cost():
     """

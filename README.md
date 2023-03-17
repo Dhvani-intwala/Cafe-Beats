@@ -110,17 +110,30 @@ Description: On the Welcome page users are asked if you would like to make an or
 - Yes
 - No
 
-Operation: when user select yes then the user is asked to Enter his name. when user select no then thanks for visting us! page appears.
+Operation: when user select yes then the user is asked to Enter his name. when user select no then thanks for visting us page appears.
 
 ----
 
 #### Main page
 
-Purpose: To ask enter user name , address and choice of delivery type.
+Purpose: To ask the user to enter the user-name, address, and choice of delivery type.
 
-operation: when user enter their name then again choice of devlivery type. there are two option are display one of home delivery and second of pick-up option. then again ask to enter there address
-
+operation: after entering the user name, the user is asked for the choice of the delivery type, which is either home delivery or pick-up, and then the user is asked to enter the address.
 ----
+
+#### Menu Page
+
+On the Menu page users are provided with a table format of the menu with the range of items available for order. Users will be provdided with five options.
+
+- Item number - To add the item to the order, users will be provided with feedback showing their selected item has been added to the order list and also a warning message if an invalid input has been entered.
+- P - To preview the current order.
+- R - To remove item number.
+- C - To confirm order.
+- Q - To cancel order, view thank you message and exit the app.
+
+#### Preview page
+
+The preview page shows the user's selected order list in a table format. The table shows the item details like item name and price. Also it provides user the option to return to the menu page by pressing Y.
 
 </details>
 
@@ -144,11 +157,11 @@ The following flowchart was created to help identify functions that would be req
 
 ## Technologies Used
 
-### Languages
+### Coding Languages
 
 - Python 3 - Used to create the command line based app.
 
-### Framework and Tools
+### Frameworks and Tools
 
 - Git - Used for version control.
 - GitHub - Used to deploy the projects code.
