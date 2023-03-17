@@ -120,7 +120,15 @@ Purpose: To ask enter user name , address and choice of delivery type.
 
 operation: when user enter their name then again choice of devlivery type. there are two option are display one of home delivery and second of pick-up option. then again ask to enter there address
 
+----
+
 </details>
+
+## Technical Design
+
+### Structure
+
+This app was designed using Code Institutes Python Essentials Template. The template creates a command line interface within a blank page with a run button located above the command line interface. As this project is only intended for use on large screen devices there was no need to incorporate responsiveness to the page. On arrival to the page, the user will be presented with a welcome message and instructions on user input choices.
 
 ## Deployment
 This project was deployed to Heroku with following steps:
