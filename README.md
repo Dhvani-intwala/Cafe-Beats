@@ -159,6 +159,26 @@ The following flowchart was created to help identify functions that would be req
 - Heroku Platform - Used to deploy the live project.
 - PEP8 - Used to validate code against Python conventions
 
+## Libraries
+
+### Python Libraries
+
+- os - Used to determine operating system and clear CLI.
+- time - Used to create a delay effect.
+- datetime - Used to get current time stamp and assign times to orders.
+
+### Third Party Libraries 
+
+- tabulate - I used this library to output lists in a table format enhancing user experience and overall readability.
+
+- termcolor - I used this library to give colour to user feedback and instructions.
+
+- pyfiglet - I used this library to generate the text art messages.
+
+- gspread - I used this library to add, remove and manipulate data within my Google Sheets worksheets and to interact with Google APIs
+
+- google.oauth.service_account - I used this library to set up the authentication needed to access the Google API and connect the Service Account using the Credentials function. From this a cred.json file was generated with all details needed for the API to access the Google account. This information is then stored in the config var section when deploying to Heroku.
+
 ## Deployment
 This project was deployed to Heroku with following steps:
 1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
