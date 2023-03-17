@@ -142,6 +142,23 @@ The following flowchart was created to help identify functions that would be req
 
 - Google Sheets API - Google Sheets was used in this project to store all required data outside the container.
 
+## Technologies Used
+
+### Languages
+
+- Python 3 - Used to create the command line based app.
+
+### Framework and Tools
+
+- Git - Used for version control.
+- GitHub - Used to deploy the projects code.
+- Gitpod - Used to develop and test code.
+- lucidchart Used to create the project flow.
+- Google Sheets - Used to store data outside of the program with the User data, food menu and sales records stored on separate worksheets.
+- Google Cloud Platform - Used to manage access permissions to google services such as google autho and google sheets.
+- Heroku Platform - Used to deploy the live project.
+- PEP8 - Used to validate code against Python conventions
+
 ## Deployment
 This project was deployed to Heroku with following steps:
 1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
