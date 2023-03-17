@@ -130,6 +130,18 @@ operation: when user enter their name then again choice of devlivery type. there
 
 This app was designed using Code Institutes Python Essentials Template. The template creates a command line interface within a blank page with a run button located above the command line interface. As this project is only intended for use on large screen devices there was no need to incorporate responsiveness to the page. On arrival to the page, the user will be presented with a welcome message and instructions on user input choices.
 
+### Flowchart
+
+The following flowchart was created to help identify functions that would be required in the Python files.
+
+<details><summary>Overview</summary></details>
+
+### Data Models
+
+- Lists and Sets- This project uses lists and sets to aid the storage of data from the Google Sheets file to variables and vice versa.
+
+- Google Sheets API - Google Sheets was used in this project to store all required data outside the container.
+
 ## Deployment
 This project was deployed to Heroku with following steps:
 1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
