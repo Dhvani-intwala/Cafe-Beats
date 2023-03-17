@@ -30,11 +30,6 @@ ORDER_LIST = SHEET.worksheet("order_list")
 
 MAX_MENU_ITEM = len(MENU.get_all_values()) - 2
 
-# Order receipt constants
-DELIVERY_CHARGE = 5
-DELIVERY_TIME = 30
-PICKUP_TIME = 15
-
 # Global variables
 user_data = []  # Contains user name, user order id, order type and address
 order_data = []  # Contains item number, item name, item price
@@ -96,7 +91,9 @@ def welcome():
             get_user_details()
             break
         elif start_order.capitalize() == "N":
-            print(colored("\nThanks for visiting us!\n", "yellow"))
+            # print(colored("\nThanks for visiting us!\n", "yellow"))
+            clear_screen()
+            thank_you()
             break
         else:
             print(colored("Invaild input.Enter Y to start.\n", "red"))
@@ -106,6 +103,7 @@ def take_user_name_input():
     """
     Function to take name input.
     """
+    clear_screen()
     user_name = input("Enter your name:\n")
     if user_name == "":
         print(colored("\n***Name is required***\n", "red"))
@@ -132,6 +130,7 @@ def take_address_input():
     """
     Function to take address input.
     """
+    clear_screen()
     address = input("Enter your Address:\n")
     if address == "":
         print(
@@ -156,6 +155,7 @@ def get_user_details():
     print(
         colored(f"Selected delivery type is: {order_type}\n", "yellow")
     )
+    sleep(2)
     if order_type == "Home delivery":
         address = take_address_input()
         print(
@@ -171,7 +171,8 @@ def get_user_details():
     display_menu_list()
 
 
-def display_menu_list(is_useraction_required=0):
+def display_menu_list(is_useraction_required = 0,
+                      food_item_selected =- 1):
     """
     Fetches the cafe beats menu from google sheets worksheet 'menu' and
     displays it in formatted table form to user.
@@ -183,7 +184,9 @@ def display_menu_list(is_useraction_required=0):
         user_action()
     else:
         print(
-            'You ordered Item ', order_data)
+            colored(
+                f'\nYou ordered Item {display_menu[food_item_selected + 1][0]} {display_menu[food_item_selected + 1][1]}'
+                f' priced at{display_menu[food_item_selected + 1][2]}', "green"))
 
 
 def user_action():
@@ -198,10 +201,8 @@ def user_action():
                 food_item = int(food_item)
                 clear_screen()
                 order_data.append(food_item)
-                display_menu_list(1)
-                # print("You ordered: ", order_data)
+                display_menu_list(1, food_item)
                 item_number += 1
-                # food_item = input('Please enter a valid input: ')
             except IndexError:
                 clear_screen()
                 print(colored(
@@ -351,7 +352,6 @@ def remove_item():
     clear_screen()
     display_menu_list(1)
     return
-    # user_action()
 
 
 def complete_order():
@@ -359,68 +359,87 @@ def complete_order():
     Function to complete order and pass arguments to
     Order class and its functions
     """
+    # Display date & time for order receipt
+    order_time = datetime.now()
+    delivery_time = order_time + timedelta(hours=1)
+    pickup_time = order_time + timedelta(minutes=30)
+    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
+    clear_screen()
+    order_complete = True
+    while complete_order():
+        print(colored('Are you ready to complete your order?\n', 'yellow'))
+        print('[Y] - Yes\n[N] - No\n')
+        order_complete = input('Please enter a vaild input:').strip()
+        order_complete = order_complete.capitalize()
+        if order_complete == 'Y':
+            clear_screen()
+            print_receipt()
+            break
+        elif order_complete == 'N':
+            clear_screen()
+            display_menu_list()
+            order_complete = False
+            return
+        else:
+            clear_screen()
+            print(
+                colored(f'Im sorry "{order_complete}" is an'
+                        ' invalid input\n', 'yellow'))
+        while True:
+            finish = input(colored(
+            "Please press 'Q' to quit. \n", 'green')).strip()
+        finish = finish.capitalize()
+        if finish == 'Q':
+            clear_screen()
+            thank_you()
+            break
+        else:
+            print(
+                colored(f'Im sorry but {finish} is'
+                        ' an invalid input.', 'yellow'))
+        break
+
+            
+def print_receipt():
+    """
+    Function to print a formatted order receipt to the command line.
+    """
+    print()
     # Display user data
     print(colored("****Your Reciept****\n", "yellow"))
     print(f"User name: {user_data[0]}")
     print(f"Order Id: {user_data[1]}")
     print(f"Order type: {user_data[2]}")
     print(f"Address: {user_data[3]}")
-    # Display date & time for order receipt
-    order_time = datetime.now()
-    delivery_time = order_time + timedelta(minutes=DELIVERY_TIME)
-    pickup_time = order_time + timedelta(minutes=PICKUP_TIME)
-    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
-    delivery_time = delivery_time.strftime("%H:%M:%S  %d-%m-%Y")
-    pickup_time = pickup_time.strftime("%H:%M:%S  %d-%m-%Y")
-    print(f"Order time: {order_time}\n")
-    total_price = 0  # initialize total price
-    local_user_data = get_individual_user_data()
-    # Calculating total price for order receipt
-    for item in local_user_data:
-        price = float(item[2].split('€')[1])
-        total_price += price
-        display_total_price = "€" + str(round(total_price, 2))
-    tabulate_data(local_user_data)
-    if user_data[2] == "Home delivery":
-        print(
-            colored(
-                f"\nDelivey Charge: €{float(DELIVERY_CHARGE):.2f}", "yellow"
-            )
-        )
-        display_total_price = "€" + str(total_price + DELIVERY_CHARGE)
-        print(
-            colored(
-                f"Total price of your order: {display_total_price}", "yellow"
-            )
-        )
-    else:
-        print(
-            colored(
-                f"\nTotal price of your order: {display_total_price}", "yellow"
-            )
-        )
-    if user_data[2] == "Home delivery":
-        print(
-            colored(
-                f"Your order will be delivered at {delivery_time}\n", "yellow"
-            )
-        )
-    else:
-        print(
-            colored(
-                f"Your order will be ready for Pickup at {pickup_time}",
-                "yellow",
-            )
-        )
-    print(colored("\nThanks for your order. Enjoy your meal!", "green"))
-    while True:
-        end = input("\nEnter Q to quit:\n")
-        if end.capitalize() == "Q":
-            clear_screen()
-            thank_you()
-            sleep(2)
-            clear_screen()
-            break
+    print()
+    print('************** Order Summary **************\n')
+    format_order_list()
+    print()
+    total_order_cost()
+    delivery_time()
+
+
+def delivery_time():
+    """
+    Function to calculate current time and delivery time.
+    """
+    current_time = datatime.now()
+    order_ready_time = current_time + timedelta(hours=1, minutes=15)
+    order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
+
+    if delivery_time()
+
+def total_order_cost():
+    """
+    Function to calculate total order cost as per current order list.
+    """
+
+def format_order_list():
+    """
+    Function to print formatted list of current order
+    to the command line.
+    """
+    tabulate_data(user_info)
 
 
 def thank_you():
@@ -430,7 +449,7 @@ def thank_you():
     title = 'Thanks for Visiting!'
     print(pyfiglet.figlet_format(title))
     print('\nCreated by Dhvani Intwala'
-          '\nGitHub -'
+          '\n\nGitHub -'
           'https://github.com/Dhvani-intwala'
           '\n\nLinkedIn -'
           'https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n')

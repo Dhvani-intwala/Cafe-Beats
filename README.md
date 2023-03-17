@@ -113,6 +113,13 @@ Description: On the Welcome page users are asked if you would like to make an or
 Operation: when user select yes then the user is asked to Enter his name. when user select no then thanks for visting us! page appears.
 
 ----
+
+#### Main page
+
+Purpose: To ask enter user name , address and choice of delivery type.
+
+operation: when user enter their name then again choice of devlivery type. there are two option are display one of home delivery and second of pick-up option. then again ask to enter there address
+
 </details>
 
 ## Deployment
@@ -139,21 +146,16 @@ This project was deployed to Heroku with following steps:
 
 6. Go to the "settings" tab, add the Python build pack and then the node.js build pack (please note they need to be in the correct order of Python above node.js).
 
-<details>
-<summary>Screenshot</summary>
-<img src="Screenshot/App-information.png">
-</details>
+    <details>
+    <summary>Screenshot</summary>
+    <img src="Screenshot/App-information.png">
+    </details>
 
-<details>
-<summary>Screenshot</summary>
-<img src="Screenshot/Add-buildpack1.png">
-</details
-
-<details>
-<summary>Screenshot</summary>
-<img src="Screenshot/buildpack.png">
-</details>
-
+    <details>
+    <summary>Screenshot</summary>
+    <img src="Screenshot/Add-buildpack1.png">
+    <img src="Screenshot/buildpack.png">
+    </details
 
 
 7. Go to the "deploy" tab and pick GitHub as a deployment method.
