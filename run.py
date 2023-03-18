@@ -171,8 +171,7 @@ def get_user_details():
     display_menu_list()
 
 
-def display_menu_list(is_useraction_required = 0,
-                      food_item_selected =- 1):
+def display_menu_list(is_useraction_required=0, food_item_selected=-1):
     """
     Fetches the cafe beats menu from google sheets worksheet 'menu' and
     displays it in formatted table form to user.
@@ -427,12 +426,12 @@ def delivery_time():
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
     order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
 
-    if delivery_time():
 
 def total_order_cost():
     """
     Function to calculate total order cost as per current order list.
     """
+
 
 def format_order_list():
     """
