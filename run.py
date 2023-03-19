@@ -351,15 +351,30 @@ def remove_item():
     Function to pop the last item from the order list.
     """
     clear_screen()
-    print(display_menu_list)
+    # print(display_menu_list)
+    # removed_item = order_data[-1]
+# remove_str = f'\nYou have removed {0}from your order'.format(removed_item)
+    # print(colored(remove_str, 'yellow'))
+    # order_data.pop()
+    # clear_screen()
+    # display_menu_list(1)
+    worksheet = ORDER_LIST.get_all_values()
+    for i, row in enumerate(worksheet):
+        for j, item in enumerate(row):
+            if (item == str(user_data[0])):
+                print(row[j+5], order_data)
+                if (row[j+5] == str(order_data[1])):
+                    print("success")
+                    ORDER_LIST.delete_row(i)
+                    break
     removed_item = order_data[-1]
     remove_str = f'\nYou have removed {0} from your order'.format(removed_item)
     print(colored(remove_str, 'yellow'))
     order_data.pop()
+    sleep(3)
     clear_screen()
     display_menu_list(1)
-    return
-
+     
 
 def complete_order():
     """
@@ -367,10 +382,10 @@ def complete_order():
     Order class and its functions
     """
     # Display date & time for order receipt
-    # order_time = datetime.now()
+    order_time = datetime.now()
     # delivery_time = order_time + timedelta(hours=1)
     # pickup_time = order_time + timedelta(minutes=30)
-    # order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
+    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
     clear_screen()
     order_complete = True
     while complete_order():
@@ -393,8 +408,9 @@ def complete_order():
                 colored(f'Im sorry "{order_complete}" is an'
                         ' invalid input\n', 'yellow'))
         while True:
-            finish = input(colored(
-            "Please press 'Q' to quit. \n", 'green')).strip()
+            finish = input(
+                colored(
+                        "Please press 'Q' to quit. \n", 'green')).strip()
         finish = finish.capitalize()
         if finish == 'Q':
             clear_screen()
@@ -406,7 +422,7 @@ def complete_order():
                         ' an invalid input.', 'yellow'))
         break
 
-            
+
 def print_receipt():
     """
     Function to print a formatted order receipt to the command line.
@@ -430,10 +446,10 @@ def delivery_time():
     """
     Function to calculate current time and delivery time.
     """
-    current_time = datatime.now()
+    current_time = datetime.now()
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
-    order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d") 
-
+    order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
+    print()
 
 
 def total_order_cost():
@@ -447,7 +463,6 @@ def format_order_list():
     Function to print formatted list of current order
     to the command line.
     """
-    tabulate_data(user_info)
 
 
 def thank_you():
