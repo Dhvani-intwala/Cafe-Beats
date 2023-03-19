@@ -109,7 +109,8 @@ def take_user_name_input():
         print(colored("\n***Name is required***\n", "red"))
         return take_user_name_input()
     clear_screen()
-    return print(pyfiglet.figlet_format(f'Hi {user_name}', font="standard"))
+    print(pyfiglet.figlet_format(f'Hi {user_name}', font="standard"))
+    return user_name
 
 
 def take_order_type_input():
@@ -184,8 +185,10 @@ def display_menu_list(is_useraction_required=0, food_item_selected=-1):
     else:
         print(
             colored(
-                f'\nYou ordered Item {display_menu[food_item_selected + 1][0]} {display_menu[food_item_selected + 1][1]}'
-                f' priced at{display_menu[food_item_selected + 1][2]}', "green"))
+                f'\nYou ordered Item {display_menu[food_item_selected + 1][0]}\
+                                     {display_menu[food_item_selected + 1][1]}'
+                f' priced at{display_menu[food_item_selected + 1][2]}',
+                "green"))
 
 
 def user_action():
@@ -266,6 +269,7 @@ def add_item(item_number):
     """
     cell = MENU.find(str(item_number))
     order_row = user_data + MENU.row_values(cell.row) + ["Processing"]
+    # print(user_data)
     ORDER_LIST.append_row(order_row)
 
 
@@ -280,7 +284,9 @@ def get_individual_user_data():
             if item == str(user_data[1]):
                 row.pop(7)  # to remove order status
                 del row[0:4]  # to remove user data
+                row.pop()
                 individual_user_data.append(row)
+    sleep(2)
     return individual_user_data
 
 
@@ -308,7 +314,9 @@ def preview_order():
     while True:
         if i:
             print(colored("----------Order Preview----------\n", "yellow"))
+            # print(local_user_data)
             tabulate_data(local_user_data)
+            # print(local_user_data)
             i = False
         preview_option = input(colored(
                 '\nPlease press [Y] to return to the order page.\n', 'yellow'))
@@ -359,10 +367,10 @@ def complete_order():
     Order class and its functions
     """
     # Display date & time for order receipt
-    order_time = datetime.now()
-    delivery_time = order_time + timedelta(hours=1)
-    pickup_time = order_time + timedelta(minutes=30)
-    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
+    # order_time = datetime.now()
+    # delivery_time = order_time + timedelta(hours=1)
+    # pickup_time = order_time + timedelta(minutes=30)
+    # order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
     clear_screen()
     order_complete = True
     while complete_order():
@@ -424,7 +432,8 @@ def delivery_time():
     """
     current_time = datatime.now()
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
-    order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
+    order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d") 
+
 
 
 def total_order_cost():
