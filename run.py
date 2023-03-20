@@ -12,6 +12,7 @@ from google.oauth2.service_account import Credentials
 from tabulate import tabulate
 from termcolor import colored
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -54,6 +55,11 @@ Add item by entering item number.
 [Q] - To quit
 """
 
+ORDER_TYPES = {
+    "DELIVERY": 'Home delivery',
+    "PICKUP": 'Pickup'
+}
+
 
 def clear_screen():
     """
@@ -85,18 +91,18 @@ def welcome():
     title = "Welcome to The Cafe Beats"
     print(colored(pyfiglet.figlet_format(title, font="standard"), "red"))
     print(colored(WELCOME_MSG, "green"))
-    while True:
-        start_order = input("\nPlease enter a valid input:\n")
-        if start_order.capitalize() == "Y":
-            get_user_details()
-            break
-        elif start_order.capitalize() == "N":
+    main_loop = True
+    while main_loop:
+        start_order = input("\nPlease enter a valid input:\n").capitalize()
+        if start_order == "Y":
+            get_order_details()
+            main_loop = False
+        elif start_order == "N":
             # print(colored("\nThanks for visiting us!\n", "yellow"))
             clear_screen()
             thank_you()
-            break
         else:
-            print(colored("Invaild input.Enter Y to start.\n", "red"))
+            print(colored("Invalid input.Enter Y to start.\n", "red"))
 
 
 def take_user_name_input():
@@ -122,9 +128,9 @@ def take_order_type_input():
         print(colored("\nInvalid delivery type. Try again.\n", "red"))
         return take_order_type_input()
     if order_type == "D":
-        return "Home delivery"
-    elif order_type == "P":
-        return "Pickup"
+        return ORDER_TYPES['DELIVERY']
+    if order_type == "P":
+        return ORDER_TYPES['PICKUP']
 
 
 def take_address_input():
@@ -141,30 +147,33 @@ def take_address_input():
     return address
 
 
-def get_user_details():
+def get_order_details():
     """
-    Gets user details like user name, order type, address and
+    Gets order details like user name, order type, address and
     appends them in user data list along with user order Id
     """
     user_data.clear()
     user_name = take_user_name_input()
     user_data.append(user_name)
+
     user_order_id = random.getrandbits(16)
     user_data.append(user_order_id)
+
     order_type = take_order_type_input()
     user_data.append(order_type)
+
     print(
         colored(f"Selected delivery type is: {order_type}\n", "yellow")
     )
     sleep(2)
-    if order_type == "Home delivery":
+    if order_type == ORDER_TYPES['DELIVERY']:
         address = take_address_input()
         print(
                 colored
                 (f"\nYour provided address is: {address}\n", "yellow")
             )
         user_data.append(address)
-    elif order_type == "Pickup":
+    elif order_type == ORDER_TYPES['PICKUP']:
         user_data.append("The Cafe Beats")
     print(colored("\nLoading menu...", "green"))
     sleep(2)
@@ -172,7 +181,7 @@ def get_user_details():
     display_menu_list()
 
 
-def display_menu_list(is_useraction_required=0, food_item_selected=-1):
+def display_menu_list(is_useraction_required=True, food_item_selected=-1):
     """
     Fetches the cafe beats menu from google sheets worksheet 'menu' and
     displays it in formatted table form to user.
@@ -180,7 +189,7 @@ def display_menu_list(is_useraction_required=0, food_item_selected=-1):
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
-    if (is_useraction_required == 0):
+    if (is_useraction_required):
         user_action()
     else:
         print(
@@ -203,7 +212,7 @@ def user_action():
                 food_item = int(food_item)
                 clear_screen()
                 order_data.append(food_item)
-                display_menu_list(1, food_item)
+                display_menu_list(False, food_item)
                 item_number += 1
             except IndexError:
                 clear_screen()
@@ -245,10 +254,10 @@ def user_action():
                 remove_item()
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
-            print(colored("\nThanks for visiting us!\n", "yellow"))
+            thank_you()
             sleep(2)
             clear_screen()
-            break
+            return
         elif food_item.capitalize() == "C":
             local_user_data = get_individual_user_data()
             # Evaluating order list whether empty or not
@@ -269,7 +278,6 @@ def add_item(item_number):
     """
     cell = MENU.find(str(item_number))
     order_row = user_data + MENU.row_values(cell.row) + ["Processing"]
-    # print(user_data)
     ORDER_LIST.append_row(order_row)
 
 
@@ -284,7 +292,6 @@ def get_individual_user_data():
             if item == str(user_data[1]):
                 row.pop(7)  # to remove order status
                 del row[0:4]  # to remove user data
-                row.pop()
                 individual_user_data.append(row)
     sleep(2)
     return individual_user_data
@@ -314,26 +321,23 @@ def preview_order():
     while True:
         if i:
             print(colored("----------Order Preview----------\n", "yellow"))
-            # print(local_user_data)
             tabulate_data(local_user_data)
-            # print(local_user_data)
+            print(local_user_data)
             i = False
         preview_option = input(colored(
                 '\nPlease press [Y] to return to the order page.\n', 'yellow'))
         preview_option = preview_option.capitalize()
         if preview_option == 'Y':
             clear_screen()
-            display_menu_list(1)
-            return
+            display_menu_list(False)
+            break
         else:
             clear_screen()
             print(
-                colored
-                (
-                    '\nPlease enter "Y"'' to return to order screen.',
-                    'yellow'))
+                colored(
+                        '\nPlease enter "Y"'' to return to order screen.',
+                        'yellow'))
             return preview_option
-
         if preview_option.isdigit():
             preview_option = int(preview_option)
         if preview_option.isdigit():
@@ -351,30 +355,25 @@ def remove_item():
     Function to pop the last item from the order list.
     """
     clear_screen()
-    # print(display_menu_list)
-    # removed_item = order_data[-1]
-# remove_str = f'\nYou have removed {0}from your order'.format(removed_item)
-    # print(colored(remove_str, 'yellow'))
-    # order_data.pop()
-    # clear_screen()
-    # display_menu_list(1)
     worksheet = ORDER_LIST.get_all_values()
+    removed_item = None
     for i, row in enumerate(worksheet):
         for j, item in enumerate(row):
             if (item == str(user_data[0])):
-                print(row[j+5], order_data)
-                if (row[j+5] == str(order_data[1])):
+                if (row[j+1] == str(user_data[1])):
+                    print(i, j, row, user_data, order_data)
+                    removed_item = row[5]
                     print("success")
-                    ORDER_LIST.delete_row(i)
+                    ORDER_LIST.delete_row(i+1)
                     break
-    removed_item = order_data[-1]
+
     remove_str = f'\nYou have removed {0} from your order'.format(removed_item)
     print(colored(remove_str, 'yellow'))
     order_data.pop()
     sleep(3)
     clear_screen()
-    display_menu_list(1)
-     
+    display_menu_list(False)
+
 
 def complete_order():
     """
@@ -382,13 +381,10 @@ def complete_order():
     Order class and its functions
     """
     # Display date & time for order receipt
-    order_time = datetime.now()
-    # delivery_time = order_time + timedelta(hours=1)
-    # pickup_time = order_time + timedelta(minutes=30)
-    order_time = order_time.strftime("%H:%M:%S  %d-%m-%Y")
+    order_time = datetime.now() + timedelta(hours=1)
+    order_time = order_time.strftime('%Y-%m-%d %H:%M:%S')
     clear_screen()
-    order_complete = True
-    while complete_order():
+    while True:
         print(colored('Are you ready to complete your order?\n', 'yellow'))
         print('[Y] - Yes\n[N] - No\n')
         order_complete = input('Please enter a vaild input:').strip()
@@ -400,27 +396,23 @@ def complete_order():
         elif order_complete == 'N':
             clear_screen()
             display_menu_list()
-            order_complete = False
             return
         else:
             clear_screen()
             print(
                 colored(f'Im sorry "{order_complete}" is an'
                         ' invalid input\n', 'yellow'))
-        while True:
-            finish = input(
-                colored(
-                        "Please press 'Q' to quit. \n", 'green')).strip()
+    while True:
+        finish = input(colored(
+                    "Please press 'Q' to quit. \n", 'green')).strip()
         finish = finish.capitalize()
         if finish == 'Q':
             clear_screen()
             thank_you()
-            break
         else:
             print(
                 colored(f'Im sorry but {finish} is'
                         ' an invalid input.', 'yellow'))
-        break
 
 
 def print_receipt():
@@ -456,6 +448,7 @@ def total_order_cost():
     """
     Function to calculate total order cost as per current order list.
     """
+    # order_cost = 0
 
 
 def format_order_list():

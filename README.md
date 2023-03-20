@@ -192,6 +192,83 @@ The following flowchart was created to help identify functions that would be req
 
 - google.oauth.service_account - I used this library to set up the authentication needed to access the Google API and connect the Service Account using the Credentials function. From this a cred.json file was generated with all details needed for the API to access the Google account. This information is then stored in the config var section when deploying to Heroku.
 
+## Features
+
+### Existing features
+
+#### Welcome message
+
+The welcome message is featured on the home page and will greet users with a friendly message.
+
+<details>
+<summary>Welcome message image</summary>
+
+![screenshot-welcome-image](Screenshot/Screenshot-of-the-mockup-image.png)
+</details>
+
+#### Welcome message invalid input feedback 
+
+The welcome message invalid input feedback is featured on the welcome page and will alert users of an invalid option entry.
+
+<details>
+<summary>Welcome message invalid input feedback</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+#### User Name and delivery type option
+
+This page asks users to provide their name. Once user provies the name, a hi message displayed with user's name and devlivery type options. one option is home delivery and another is pickup.
+pickup will auto populate the address as 'The Pizza Hub'. For home delivery, customers will be asked to enter their address.
+
+<details>
+<summary>User details type option</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+#### Invalid delivery type feedback
+
+If user input is other than 'D' and 'P', a invalid delivery type feedback is displayed.
+
+<details>
+<summary>Delivery type image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+#### Menu 
+
+The Menu feature will display a tabulated format of all items available for order. The menu has five options: Add item, preview order, remove item, condirm order, quit.
+
+<details>
+<summary>Menu image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+#### Add item to order
+
+The Add item to order feature on the Menu page allows users to add an item to their order by typing the relevant item number as displayed on the menu.
+
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+
+#### Quit 
+
+This feature is used throughout the app to allow the user to quit the app with a thank you message.
+
+<details>
+<summary>Quit image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+
 ## Deployment
 This project was deployed to Heroku with following steps:
 1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
@@ -216,17 +293,16 @@ This project was deployed to Heroku with following steps:
 
 6. Go to the "settings" tab, add the Python build pack and then the node.js build pack (please note they need to be in the correct order of Python above node.js).
 
-    <details>
-    <summary>Screenshot</summary>
-    <img src="Screenshot/App-information.png">
-    </details>
+<details>
+<summary>Screenshot</summary>
+<img src="Screenshot/App-information.png">
+</details>
 
-    <details>
-    <summary>Screenshot</summary>
-    <img src="Screenshot/Add-buildpack1.png">
-    <img src="Screenshot/buildpack.png">
-    </details
-
+<details>
+<summary>Screenshot</summary>
+<img src="Screenshot/Add-buildpack1.png">
+<img src="Screenshot/buildpack.png">
+</details
 
 7. Go to the "deploy" tab and pick GitHub as a deployment method.
 <details>
