@@ -257,6 +257,22 @@ The Add item to order feature on the Menu page allows users to add an item to th
 ![screenshot-welcome-image]()
 </details>
 
+#### Invalid item for order
+
+The Invalid item feature on the Menu page warns users that their previously entered input is not valid.
+
+<details>
+<summary>Invaild food item number image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
+### Empty order list warning 
+
+
+
+
+
 
 #### Quit 
 

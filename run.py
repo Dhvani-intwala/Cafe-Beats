@@ -409,6 +409,7 @@ def complete_order():
         if finish == 'Q':
             clear_screen()
             thank_you()
+            break
         else:
             print(
                 colored(f'Im sorry but {finish} is'
@@ -428,7 +429,8 @@ def print_receipt():
     print(f"Address: {user_data[3]}")
     print()
     print('************** Order Summary **************\n')
-    format_order_list()
+    local_user_data = get_individual_user_data()
+    tabulate_data(local_user_data)
     print()
     total_order_cost()
     delivery_time()
@@ -441,21 +443,56 @@ def delivery_time():
     current_time = datetime.now()
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
     order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
-    print()
+    delivery_type = user_data[2]
+    if delivery_type == ORDER_TYPES['DELIVERY']:
+        print(f'Your order will be delivered at {order_ready_time}\n')
+    elif delivery_type == ORDER_TYPES['PICKUP']:
+        print(f'Your order will be ready for pickup at'
+              f'at {order_ready_time}\n')
 
 
 def total_order_cost():
     """
     Function to calculate total order cost as per current order list.
     """
-    # order_cost = 0
+    order_cost = 0
+    delivery_cost = 10
+    local_user_data = get_individual_user_data()
+    for item in local_user_data:
+        price = float(item[2].split("€")[1])
+        order_cost += price
+        display_total_price = "€" + str(round(order_cost, 2))
+    tabulate_data(local_user_data)
+    if user_data[2] == ORDER_TYPES['DELIVERY']:
+        print(colored(
+                f"\nDelivey charge: €{float(delivery_cost):.2f}", "yellow"
+        ))
+        display_total_price = "€" + str(order_cost + delivery_cost)
+        print(
+            colored(
+                f"Total price of your order: {display_total_price}", "yellow"
+            )
+        )
+    else:
+        print(
+            colored(
+                f"\nTotal price of your order: {display_total_price}", "yellow"
+            )
+        )
 
 
-def format_order_list():
+def format_order_list(user_info):
     """
     Function to print formatted list of current order
     to the command line.
     """
+    formate_order_data = tabulate(
+        user_info,
+        headers=["Item", "Name", "Cost"],
+        tablefmt="simple",
+        numalign="center",
+    )
+    print(formate_order_data)
 
 
 def thank_you():
