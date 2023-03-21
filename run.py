@@ -108,6 +108,7 @@ def welcome():
         elif start_order == "N":
             clear_screen()
             thank_you()
+            break
         else:
             print(colored("Invalid input.Enter Y to start.\n", "red"))
 
@@ -265,7 +266,7 @@ def user_action():
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
             thank_you()
-            sleep(2)
+            sleep(3)
             clear_screen()
             return
         elif food_item.capitalize() == "C":

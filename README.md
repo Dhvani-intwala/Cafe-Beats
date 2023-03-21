@@ -105,20 +105,21 @@ The Cafe beats app is for users who wish to place orders for home delivery / pic
 
 Purpose: To greet users
 
-Description: On the Welcome page users are asked if you would like to make an order. userd will be provdied with 2 options. 
+Description: On the Welcome page users are asked "Do you want to start your order now?". users will be provdied with 2 options. 
 
 - Yes
 - No
 
-Operation: when user select yes then the user is asked to Enter his name. when user select no then thanks for visting us page appears.
+Operation: when user select yes by entering Y, then the user is asked to "Enter your name". when users select no by entering N, then thanks for visting us page appears.
 
 ----
 
 #### Main page
 
-Purpose: To ask the user to enter the user-name, address, and choice of delivery type.
+Purpose: To ask the user to enter the user name, address, and choice of delivery type.
 
-operation: after entering the user name, the user is asked for the choice of the delivery type, which is either home delivery or pick-up, and then the user is asked to enter the address.
+Operation: after entering the user name, the user is asked the choice the order type, which is either home delivery or pick-up at the store, if the user selects home delivery by entering "d" then the user is asked to enter the address after entering address, menu page is displayed. And if the user select pick-up at the store by entering "p" then directly menu page is displayed.
+
 ----
 
 #### Menu Page
@@ -126,14 +127,22 @@ operation: after entering the user name, the user is asked for the choice of the
 On the Menu page users are provided with a table format of the menu with the range of items available for order. Users will be provdided with five options.
 
 - Item number - To add the item to the order, users will be provided with feedback showing their selected item has been added to the order list and also a warning message if an invalid input has been entered.
-- P - To preview the current order.
-- R - To remove item number.
-- C - To confirm order.
-- Q - To cancel order, view thank you message and exit the app.
+- [P] - To preview the current order.
+- [R] - To remove item number.
+- [C] - To confirm order.
+- [Q] - To cancel order, view thank you message and exit the app.
 
 #### Preview page
 
-The preview page shows the user's selected order list in a table format. The table shows the item details like item name and price. Also it provides user the option to return to the menu page by pressing Y.
+The preview page shows the user selected order list in a table format. The table shows the item details like item name and price. Also it provides user the option to return to the menu page by pressing "Y".
+
+#### confirm order page
+
+The user can confirm the order by entering "c", then confirm page is open where the user is asked "Are you ready to complete your order?" With two option's either the user can press "y" and confirm the order or the user can press "n" and again place the order.
+
+#### Receipt page
+
+when the user confirms the order then receipt page is displayed, where the user can see his name , order Id number , order type and address and order summary
 
 </details>
 
