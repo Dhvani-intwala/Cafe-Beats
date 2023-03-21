@@ -31,7 +31,7 @@ The Cafe beats website has been developed to provide users the chance to order f
 5. [Features](#features)
     1. [Existing Features](#existing-features)
     2. [Future Implementations](#future-implementations)
-6. [Python Valiadation](#python-validation)
+6. [Python Validation](#python-validation)
 7. [Testing](#testing)
     1. [Device Testing](#device-testing)
     2. [Browser Compatibility](#browser-compatibility)
@@ -288,7 +288,7 @@ This feature is used throughout the app to allow the user to quit the app with a
 </details>
 
 
-## Python Valiadation
+## Python Validation
 
 <details>
 <summary>Python file - run.py</summary>

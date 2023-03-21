@@ -1,5 +1,16 @@
 """
 Import gspread to access and update data in our spreadsheet
+Import credentials class from google-auth to set up the authenication
+needed to access our Google Cloud Project.
+Import os to clear screen
+Import sleep from time to delay the display of the upcoming data
+Import datetime and timedelta to show date and time in the receipt
+Import random to generate random order id
+Import pyfiglet to display the store name in art form
+Import tabulate to display menu, preview and order receipt in
+table format
+Import colored from termcolor to provide feedback to the user in colored
+text format
 """
 import os
 from time import sleep
@@ -16,14 +27,14 @@ from termcolor import colored
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+    "https://www.googleapis.com/auth/drive",
+]
 
 # To open google sheets after authentication
 CREDS = Credentials.from_service_account_file("creds.json")
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('Cafe_Beats')
+SHEET = GSPREAD_CLIENT.open("Cafe_Beats")
 
 # To acces the worksheets in google sheets
 MENU = SHEET.worksheet("menu")
@@ -55,10 +66,7 @@ Add item by entering item number.
 [Q] - To quit
 """
 
-ORDER_TYPES = {
-    "DELIVERY": 'Home delivery',
-    "PICKUP": 'Pickup'
-}
+ORDER_TYPES = {"DELIVERY": "Home delivery", "PICKUP": "Pickup"}
 
 
 def clear_screen():
@@ -114,7 +122,7 @@ def take_user_name_input():
         print(colored("\n***Name is required***\n", "red"))
         return take_user_name_input()
     clear_screen()
-    print(pyfiglet.figlet_format(f'Hi {user_name}', font="standard"))
+    print(pyfiglet.figlet_format(f"Hi {user_name}", font="standard"))
     return user_name
 
 
@@ -127,9 +135,9 @@ def take_order_type_input():
         print(colored("\nInvalid delivery type. Try again.\n", "red"))
         return take_order_type_input()
     if order_type == "D":
-        return ORDER_TYPES['DELIVERY']
+        return ORDER_TYPES["DELIVERY"]
     if order_type == "P":
-        return ORDER_TYPES['PICKUP']
+        return ORDER_TYPES["PICKUP"]
 
 
 def take_address_input():
@@ -139,9 +147,7 @@ def take_address_input():
     clear_screen()
     address = input("Enter your Address:\n")
     if address == "":
-        print(
-            colored("\n***Enter your full address.***\n", "red")
-        )
+        print(colored("\n***Enter your full address.***\n", "red"))
         return take_address_input()
     return address
 
@@ -161,18 +167,13 @@ def get_order_details():
     order_type = take_order_type_input()
     user_data.append(order_type)
 
-    print(
-        colored(f"Selected delivery type is: {order_type}\n", "yellow")
-    )
+    print(colored(f"Selected delivery type is: {order_type}\n", "yellow"))
     sleep(2)
-    if order_type == ORDER_TYPES['DELIVERY']:
+    if order_type == ORDER_TYPES["DELIVERY"]:
         address = take_address_input()
-        print(
-                colored
-                (f"\nYour provided address is: {address}\n", "yellow")
-            )
+        print(colored(f"\nYour provided address is: {address}\n", "yellow"))
         user_data.append(address)
-    elif order_type == ORDER_TYPES['PICKUP']:
+    elif order_type == ORDER_TYPES["PICKUP"]:
         user_data.append("The Cafe Beats")
     print(colored("\nLoading menu...", "green"))
     sleep(2)
@@ -188,15 +189,17 @@ def display_menu_list(is_useraction_required=True, food_item_selected=-1):
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
-    if (is_useraction_required):
+    if is_useraction_required:
         user_action()
     else:
         print(
-            colored
-            (f'\nYou ordered Item{display_menu[food_item_selected +1][0]}\
-                                 {display_menu[food_item_selected + 1][1]}'
-                f' priced at{display_menu[food_item_selected + 1][2]}',
-                "green"))
+            colored(
+                f"\nYou ordered Item{display_menu[food_item_selected +1][0]}\
+                                    {display_menu[food_item_selected + 1][1]}"
+                f" priced at{display_menu[food_item_selected + 1][2]}",
+                "green",
+            )
+        )
 
 
 def user_action():
@@ -215,17 +218,21 @@ def user_action():
                 item_number += 1
             except IndexError:
                 clear_screen()
-                print(colored(
-                    f'\nIm sorry Item "{food_item + 1}" does not exist.'
-                    ' Please enter a valid item number', 'yellow'))
-            if (food_item >= 1 and food_item <= 20):
+                print(
+                    colored(
+                        f'\nIm sorry Item "{food_item + 1}" does not exist.'
+                        " Please enter a valid item number",
+                        "yellow",
+                    )
+                )
+            if food_item >= 1 and food_item <= 20:
                 item_number = food_item
                 add_item(item_number)
             else:
                 print(
                     colored(
                         "\n**Selected item doesn't exist in the menu**.\n",
-                        "red"
+                        "red",
                     )
                 )
                 order_data.pop()
@@ -234,9 +241,11 @@ def user_action():
             # when user enter 'P' without adding an item
             # item_number is used to display order list empty message
             if item_number == 0:
-                print(colored(
-                    "Your order list is empty. please add an item.\n",
-                    "red")
+                print(
+                    colored(
+                        "Your order list is empty. please add an item.\n",
+                        "red"
+                    )
                 )
             else:
                 print(colored("\nLoading preview page....", "green"))
@@ -247,8 +256,10 @@ def user_action():
             if len(order_data) == 0:
                 clear_screen()
                 print(display_menu_list)
-                print(colored('\nNothing to remove, basket'
-                              ' is empty', 'yellow'))
+                print(
+                    colored("\nNothing to remove, basket" " is empty",
+                            "yellow")
+                )
             else:
                 remove_item()
         elif food_item.capitalize() == "Q":
@@ -322,10 +333,13 @@ def preview_order():
             print(colored("----------Order Preview----------\n", "yellow"))
             tabulate_data(local_user_data)
             i = False
-        preview_option = input(colored(
-                '\nPlease press [Y] to return to the order page.\n', 'yellow'))
+        preview_option = input(
+            colored(
+                "\nPlease press [Y] to return to the order page.\n", "yellow"
+            )
+        )
         preview_option = preview_option.capitalize()
-        if preview_option == 'Y':
+        if preview_option == "Y":
             clear_screen()
             display_menu_list(False)
             break
@@ -333,8 +347,10 @@ def preview_order():
             clear_screen()
             print(
                 colored(
-                        '\nPlease enter "Y"'' to return to order screen.',
-                        'yellow'))
+                    '\nPlease enter "Y"' " to return to order screen.",
+                    "yellow"
+                )
+            )
             return preview_option
         if preview_option.isdigit():
             preview_option = int(preview_option)
@@ -357,16 +373,16 @@ def remove_item():
     removed_item = None
     for i, row in enumerate(worksheet):
         for j, item in enumerate(row):
-            if (item == str(user_data[0])):
-                if (row[j+1] == str(user_data[1])):
+            if item == str(user_data[0]):
+                if row[j + 1] == str(user_data[1]):
                     print(i, j, row, user_data, order_data)
                     removed_item = row[5]
                     print("success")
-                    ORDER_LIST.delete_row(i+1)
+                    ORDER_LIST.delete_row(i + 1)
                     break
 
-    remove_str = f'\nYou have removed {0} from your order'.format(removed_item)
-    print(colored(remove_str, 'yellow'))
+    remove_str = f"\nYou have removed {0} from your order".format(removed_item)
+    print(colored(remove_str, "yellow"))
     order_data.pop()
     sleep(3)
     clear_screen()
@@ -380,38 +396,43 @@ def complete_order():
     """
     # Display date & time for order receipt
     order_time = datetime.now() + timedelta(hours=1)
-    order_time = order_time.strftime('%Y-%m-%d %H:%M:%S')
+    order_time = order_time.strftime("%Y-%m-%d %H:%M:%S")
     clear_screen()
     while True:
-        print(colored('Are you ready to complete your order?\n', 'yellow'))
-        print('[Y] - Yes\n[N] - No\n')
-        order_complete = input('Please enter a vaild input:').strip()
+        print(colored("Are you ready to complete your order?\n", "yellow"))
+        print("[Y] - Yes\n[N] - No\n")
+        order_complete = input("Please enter a vaild input:").strip()
         order_complete = order_complete.capitalize()
-        if order_complete == 'Y':
+        if order_complete == "Y":
             clear_screen()
             print_receipt()
             break
-        elif order_complete == 'N':
+        elif order_complete == "N":
             clear_screen()
             display_menu_list()
             return
         else:
             clear_screen()
             print(
-                colored(f'Im sorry "{order_complete}" is an'
-                        ' invalid input\n', 'yellow'))
+                colored(
+                    f'Im sorry "{order_complete}" is an' " invalid input\n",
+                    "yellow",
+                )
+            )
     while True:
-        finish = input(colored(
-                    "Please press 'Q' to quit. \n", 'green')).strip()
+        finish = input(
+                    colored("Please press 'Q' to quit. \n", "green")).strip()
         finish = finish.capitalize()
-        if finish == 'Q':
+        if finish == "Q":
             clear_screen()
             thank_you()
             break
         else:
             print(
-                colored(f'Im sorry but {finish} is'
-                        ' an invalid input.', 'yellow'))
+                colored(
+                    f"Im sorry but {finish} is" " an invalid input.", "yellow"
+                )
+            )
 
 
 def print_receipt():
@@ -426,7 +447,7 @@ def print_receipt():
     print(f"Order type: {user_data[2]}")
     print(f"Address: {user_data[3]}")
     print()
-    print('************** Order Summary **************\n')
+    print("************** Order Summary **************\n")
     local_user_data = get_individual_user_data()
     tabulate_data(local_user_data)
     print()
@@ -442,11 +463,13 @@ def delivery_time():
     order_ready_time = current_time + timedelta(hours=1, minutes=15)
     order_ready_time = order_ready_time.strftime("%H:%M:%S %Y-%m-%d")
     delivery_type = user_data[2]
-    if delivery_type == ORDER_TYPES['DELIVERY']:
-        print(f'Your order will be delivered at {order_ready_time}\n')
-    elif delivery_type == ORDER_TYPES['PICKUP']:
-        print(f'Your order will be ready for pickup at'
-              f'at {order_ready_time}\n')
+    if delivery_type == ORDER_TYPES["DELIVERY"]:
+        print(f"Your order will be delivered at {order_ready_time}\n")
+    elif delivery_type == ORDER_TYPES["PICKUP"]:
+        print(
+            f"Your order will be ready for pickup at"
+            f"at {order_ready_time}\n"
+        )
 
 
 def total_order_cost():
@@ -457,14 +480,13 @@ def total_order_cost():
     delivery_cost = 10
     local_user_data = get_individual_user_data()
     for item in local_user_data:
-        price = float(item[2].split("€")[1])
+        price = float(item[2].split(' ')[2])
         order_cost += price
         display_total_price = "€" + str(round(order_cost, 2))
-    tabulate_data(local_user_data)
-    if user_data[2] == ORDER_TYPES['DELIVERY']:
-        print(colored(
-                f"\nDelivey charge: €{float(delivery_cost):.2f}", "yellow"
-        ))
+    if user_data[2] == ORDER_TYPES["DELIVERY"]:
+        print(
+            colored(f"\nDelivey charge: €{float(delivery_cost):.2f}", "yellow")
+        )
         display_total_price = "€" + str(order_cost + delivery_cost)
         print(
             colored(
@@ -497,13 +519,15 @@ def thank_you():
     """
     Function to display thank you message
     """
-    title = 'Thanks for Visiting!'
+    title = "Thanks for Visiting!"
     print(pyfiglet.figlet_format(title))
-    print('\nCreated by Dhvani Intwala'
-          '\n\nGitHub -'
-          'https://github.com/Dhvani-intwala'
-          '\n\nLinkedIn -'
-          'https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n')
+    print(
+        "\nCreated by Dhvani Intwala"
+        "\n\nGitHub -"
+        "https://github.com/Dhvani-intwala"
+        "\n\nLinkedIn -"
+        "https://www.linkedin.com/in/dhvani-intwala-2716bb235/\n\n"
+    )
 
 
 if __name__ == "__main__":
