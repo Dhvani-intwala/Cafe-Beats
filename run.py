@@ -98,7 +98,6 @@ def welcome():
             get_order_details()
             main_loop = False
         elif start_order == "N":
-            # print(colored("\nThanks for visiting us!\n", "yellow"))
             clear_screen()
             thank_you()
         else:
@@ -193,9 +192,9 @@ def display_menu_list(is_useraction_required=True, food_item_selected=-1):
         user_action()
     else:
         print(
-            colored(
-                f'\nYou ordered Item {display_menu[food_item_selected + 1][0]}\
-                                     {display_menu[food_item_selected + 1][1]}'
+            colored
+            (f'\nYou ordered Item{display_menu[food_item_selected +1][0]}\
+                                 {display_menu[food_item_selected + 1][1]}'
                 f' priced at{display_menu[food_item_selected + 1][2]}',
                 "green"))
 
@@ -322,7 +321,6 @@ def preview_order():
         if i:
             print(colored("----------Order Preview----------\n", "yellow"))
             tabulate_data(local_user_data)
-            print(local_user_data)
             i = False
         preview_option = input(colored(
                 '\nPlease press [Y] to return to the order page.\n', 'yellow'))

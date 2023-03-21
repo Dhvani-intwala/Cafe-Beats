@@ -147,7 +147,10 @@ This app was designed using Code Institutes Python Essentials Template. The temp
 
 The following flowchart was created to help identify functions that would be required in the Python files.
 
-<details><summary>Overview</summary></details>
+<details><summary>Overview</summary>
+
+![flowchart-screenshot-image](Screenshot/flowchart1.png)
+</details>
 
 ### Data Models
 
@@ -284,6 +287,14 @@ This feature is used throughout the app to allow the user to quit the app with a
 ![screenshot-welcome-image]()
 </details>
 
+
+## Python Valiadation
+
+<details>
+<summary>Python file - run.py</summary>
+
+![screenshot-of-the-python-validator](Screenshot/validator-python1.png)
+</details>
 
 ## Deployment
 This project was deployed to Heroku with following steps:
