@@ -279,7 +279,7 @@ The Invalid item feature on the Menu page warns users that their previously ente
 ![screenshot-welcome-image]()
 </details>
 
-### Empty order list warning 
+#### Empty order list warning 
 
 
 
@@ -304,6 +304,20 @@ In the future as my skills grow I would like to implement the following features
 - The user can also download a pdf and they will also receive an order confirmation email of what they have ordered.
 - The user can also write an feedback and review the food and service.
 - User can also make there own account and can login.
+
+## Testing 
+
+### Device Testing
+
+### Browser Compatibility
+
+The website was tested on the following web browsers:
+
+- Google Chrome (Version 104.0.5112.102)
+- Microsoft Edge
+
+### 
+
 
 
 ## Python Validation

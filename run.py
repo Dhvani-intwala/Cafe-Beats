@@ -195,8 +195,7 @@ def display_menu_list(is_useraction_required=True, food_item_selected=-1):
     else:
         print(
             colored(
-                f"\nYou ordered Item{display_menu[food_item_selected +1][0]}\
-                                    {display_menu[food_item_selected + 1][1]}"
+                f"\nYou ordered Item{display_menu[food_item_selected +1][0]} {display_menu[food_item_selected + 1][1]}"
                 f" priced at{display_menu[food_item_selected + 1][2]}",
                 "green",
             )
@@ -376,9 +375,8 @@ def remove_item():
         for j, item in enumerate(row):
             if item == str(user_data[0]):
                 if row[j + 1] == str(user_data[1]):
-                    print(i, j, row, user_data, order_data)
                     removed_item = row[5]
-                    print("success")
+                    # print("success")
                     ORDER_LIST.delete_row(i + 1)
                     break
 
@@ -481,8 +479,10 @@ def total_order_cost():
     delivery_cost = 10
     local_user_data = get_individual_user_data()
     for item in local_user_data:
-        print(item[2])
-        price = float(item[2].split(' ')[1])
+        temp = item[2].strip()
+        temp = temp.strip('\u200e')
+        temp = temp.replace("€", "")
+        price = float(temp[1:])
         order_cost += price
         display_total_price = "€" + str(round(order_cost, 2))
     if user_data[2] == ORDER_TYPES["DELIVERY"]:
