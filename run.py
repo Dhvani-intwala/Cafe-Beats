@@ -269,15 +269,14 @@ def user_action():
             clear_screen()
             return
         elif food_item.capitalize() == "C":
-            local_user_data = get_individual_user_data()
-            # Evaluating order list whether empty or not
-            if bool(local_user_data):
-                append_order_status(food_item)
-                print(colored("\nLoading reciept....", "green"))
-                sleep(2)
-                clear_screen()
+            if len(order_data) == 0:
+                print(colored('\nCannot complete order,'
+                              ' basket is empty.', 'yellow'))
+                sleep(3)
+                display_menu_list()
+            else:
                 complete_order()
-                break
+            break
         else:
             print(colored("\nInvalid input\n", "red"))
 
