@@ -142,7 +142,7 @@ The user can confirm the order by entering "c", then confirm page is open where 
 
 #### Receipt page
 
-when the user confirms the order then receipt page is displayed, where the user can see his name , order Id number , order type and address and order summary
+
 
 </details>
 
@@ -178,7 +178,7 @@ The following flowchart was created to help identify functions that would be req
 - Git - Used for version control.
 - GitHub - Used to deploy the projects code.
 - Gitpod - Used to develop and test code.
-- lucidchart Used to create the project flow.
+- Smartdraw Used to create the project flow.
 - Google Sheets - Used to store data outside of the program with the User data, food menu and sales records stored on separate worksheets.
 - Google Cloud Platform - Used to manage access permissions to google services such as google autho and google sheets.
 - Heroku Platform - Used to deploy the live project.
@@ -295,6 +295,15 @@ This feature is used throughout the app to allow the user to quit the app with a
 
 ![screenshot-welcome-image]()
 </details>
+
+
+### Future Implementations
+
+In the future as my skills grow I would like to implement the following features:
+
+- The user can also download a pdf and they will also receive an order confirmation email of what they have ordered.
+- The user can also write an feedback and review the food and service.
+- User can also make there own account and can login.
 
 
 ## Python Validation

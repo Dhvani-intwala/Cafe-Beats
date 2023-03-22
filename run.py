@@ -481,7 +481,8 @@ def total_order_cost():
     delivery_cost = 10
     local_user_data = get_individual_user_data()
     for item in local_user_data:
-        price = float(item[2].split(' ')[2])
+        print(item[2])
+        price = float(item[2].split(' ')[1])
         order_cost += price
         display_total_price = "€" + str(round(order_cost, 2))
     if user_data[2] == ORDER_TYPES["DELIVERY"]:
