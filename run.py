@@ -478,20 +478,21 @@ def total_order_cost():
     Function to calculate total order cost as per current order list.
     """
     order_cost = 0
-    delivery_cost = 10
+    delivery_cost = 10.00
     local_user_data = get_individual_user_data()
     for item in local_user_data:
         temp = item[2].strip()
         temp = temp.strip('\u200e')
         temp = temp.replace("€", "")
-        price = float(temp[1:5])
+        price = float(temp[1:])
         order_cost += price
+        # print(order_cost)
         display_total_price = "€" + str(round(order_cost, 2))
     if user_data[2] == ORDER_TYPES["DELIVERY"]:
         print(
             colored(f"\nDelivey charge: €{float(delivery_cost):.2f}", "yellow")
         )
-        display_total_price = "€" + str(order_cost + delivery_cost)
+        display_total_price = "€" + str(round(order_cost + delivery_cost, 2))
         print(
             colored(
                 f"Total price of your order: {display_total_price}", "yellow"

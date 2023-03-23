@@ -412,6 +412,14 @@ The website was tested on the following web browsers:
 | Receipt | Confirm user order on menu page | Upon order completion a formatted page of order summary is displayed | Works as expected  |
 | Quit | Enter 'Q' on menu page | User exits the app with a thank you message | Works as expected |
 
+## Bugs
+
+| Bug     | Fix       | 
+| --------| ------------| 
+| Error in converting from string to float |  White space and € sign was removed and string slice was used to convert to float |
+| When user removes an item on menu page, local variable order Id was not matching with worksheet Order ID | In remove item function  earlier row[J+4] was written and then it was changed to row[4] ,reason for doing this was to access the 4th element from the list|
+| Append order confirmation function updates order status for only one item instead of all the items for the specific user in the worksheet 'order_list'  | Use findall function instead of find function for finding user specific order data  |
+
 
 ## Deployment
 This project was deployed to Heroku with following steps:
@@ -461,7 +469,8 @@ This project was deployed to Heroku with following steps:
 </details>
 
 9. If preferred enable automatic deploys and then deploy branch.
-Wait for the app to build and then click on the "View" link which will redirect you to the deployed link.
+
+10. Wait for the app to build and then click on the "View" link which will redirect you to the deployed link.
 
 
 ### Forking the GitHub Repository
