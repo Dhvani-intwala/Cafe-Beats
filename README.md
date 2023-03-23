@@ -153,7 +153,7 @@ The following flowchart was created to help identify functions that would be req
 
 <details><summary>Overview</summary>
 
-![flowchart-screenshot-image](Screenshot/final1-flow-chart.png)
+![flowchart-screenshot-image](Screenshot/flowchart-final2.png)
 </details>
 
 ### Data Models
