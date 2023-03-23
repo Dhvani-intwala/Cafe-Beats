@@ -195,7 +195,8 @@ def display_menu_list(is_useraction_required=True, food_item_selected=-1):
     else:
         print(
             colored(
-                f"\nYou ordered Item{display_menu[food_item_selected +1][0]} {display_menu[food_item_selected + 1][1]}"
+                f"\nYou ordered Item{display_menu[food_item_selected +1][0]} "
+                f"{display_menu[food_item_selected + 1][1]}"
                 f" priced at{display_menu[food_item_selected + 1][2]}",
                 "green",
             )
@@ -217,10 +218,9 @@ def user_action():
                 display_menu_list(False, food_item)
                 item_number += 1
             except IndexError:
-                clear_screen()
                 print(
                     colored(
-                        f'\nIm sorry Item "{food_item + 1}" does not exist.'
+                        f'\nIm sorry Item "{food_item}" does not exist.'
                         " Please enter a valid item number",
                         "yellow",
                     )
@@ -372,14 +372,14 @@ def remove_item():
     removed_item = None
     for i, row in enumerate(worksheet):
         for j, item in enumerate(row):
-            if item == str(user_data[0]):
-                if row[j + 1] == str(user_data[1]):
+            if item == str(user_data[1]):
+                if row[4] == str(order_data[len(order_data) - 1]):
+                    sleep(2)
                     removed_item = row[5]
-                    # print("success")
-                    ORDER_LIST.delete_row(i + 1)
+                    ORDER_LIST.delete_rows(i + 1)
                     break
 
-    remove_str = f"\nYou have removed {0} from your order".format(removed_item)
+    remove_str = f"\nYou have removed {removed_item} from your order"
     print(colored(remove_str, "yellow"))
     order_data.pop()
     sleep(3)
@@ -413,7 +413,7 @@ def complete_order():
             clear_screen()
             print(
                 colored(
-                    f'Im sorry "{order_complete}" is an' " invalid input\n",
+                    f'Im sorry"{order_complete}" is an' " invalid input\n",
                     "yellow",
                 )
             )
@@ -481,7 +481,7 @@ def total_order_cost():
         temp = item[2].strip()
         temp = temp.strip('\u200e')
         temp = temp.replace("€", "")
-        price = float(temp[1:])
+        price = float(temp[1:5])
         order_cost += price
         display_total_price = "€" + str(round(order_cost, 2))
     if user_data[2] == ORDER_TYPES["DELIVERY"]:

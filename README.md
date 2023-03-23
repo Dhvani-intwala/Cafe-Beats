@@ -36,7 +36,6 @@ The Cafe beats website has been developed to provide users the chance to order f
     1. [Device Testing](#device-testing)
     2. [Browser Compatibility](#browser-compatibility)
     3. [Manual Testing](#manual-testing)
-    4. [Automated Testing](#automated-testing)
 8. [Bugs](#bugs)
 9. [Deployment](#deployment)
 10. [Credits](#credits)
@@ -158,7 +157,7 @@ The following flowchart was created to help identify functions that would be req
 
 <details><summary>Overview</summary>
 
-![flowchart-screenshot-image](Screenshot/flowchart1.png)
+![flowchart-screenshot-image](Screenshot/final1-flow-chart.png)
 </details>
 
 ### Data Models
@@ -225,7 +224,7 @@ The welcome message invalid input feedback is featured on the welcome page and w
 <details>
 <summary>Welcome message invalid input feedback</summary>
 
-![screenshot-welcome-image]()
+![screenshot-welcome-image-invaild-input-msg](Screenshot/Invaild_input_welcome_msg.png)
 </details>
 
 #### User Name and delivery type option
@@ -236,7 +235,10 @@ pickup will auto populate the address as 'The Pizza Hub'. For home delivery, cus
 <details>
 <summary>User details type option</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Enter-name-image](Screenshot/Enter-name-input.png)
+
+![screenshot-name-and-ordertype-image](Screenshot/name-and-order-type.png)
+
 </details>
 
 #### Invalid delivery type feedback
@@ -246,7 +248,7 @@ If user input is other than 'D' and 'P', a invalid delivery type feedback is dis
 <details>
 <summary>Delivery type image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-invaild-ordertype-image](Screenshot/Invaild-delivery-type-msg.png)
 </details>
 
 #### Menu 
@@ -256,7 +258,7 @@ The Menu feature will display a tabulated format of all items available for orde
 <details>
 <summary>Menu image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-menu-list-image](Screenshot/Menu-list.png)
 </details>
 
 #### Add item to order
@@ -316,7 +318,31 @@ The website was tested on the following web browsers:
 - Google Chrome (Version 104.0.5112.102)
 - Microsoft Edge
 
-### 
+### Manual Testing
+
+##### Testing User Stories Users
+
+1. As a user, I want to be provided with clear instructions throughout the app.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| All listed features in the Features section provide the user with feedback based on user input | As prompted, enter user input | User to be provided with positive and negative feedback based on user input | Works as expected |
+
+2. As a user, I should get an option to choose my order between pickup or home delivery.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Order type options | Enter desired order type by entering D for home delivery or P for pickup | If order type Home Delivery is selected, the address is asked for | Works as expected |
+
+3. As a user, I want to view a clear and well-structed menu.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+|Menu | Enter data when asked for name, address and delivery type | Menu and options to be displayed to the user  |Works as expected |
+
+4. As a user, I want to add an item to the order list. Additionally have the option to remove items from order list.
+
+
 
 
 
