@@ -332,7 +332,7 @@ The website was tested on the following web browsers:
 
 ### Manual Testing
 
-##### Site User Stories
+#### Site User Stories
 
 1. As a user, I want to be provided with clear instructions throughout the app.
 
@@ -378,7 +378,39 @@ The website was tested on the following web browsers:
 | ------------- | ------------- | -------------    | ------------- |
 | Display receipt  | From the menu enter 'C' to confirm the order. When prompted, confirm the order by selecting Y to View displayed Order receipt  | Upon order completion a formatted page of order summary will be displayed to the user   | Works as expected |
 
+#### Site owner stories
 
+1. As a site owner, I want users to be greeted with a welcome message to give the app a friendly experience.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+|  Welcome message  | Run the app   | Title of website and welcome message to be displayed  |Works as expected  |
+
+2. As a site owner, I want to save the user information and order data to a Google Sheets file.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Retrieve data | Add user details on main page | Menu is tabulated after retrieving data from worksheet 'menu' | Works as expected |
+|Append user data | Add item on menu page | User data and order data provided by the user during the order process is appended to the worksheet 'order_list' | Works as expected |
+
+3. As a site owner, I want the status of the order in Google Sheets worksheet 'order_list' is automatically updated based on user action.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Update order status  | Enter item number on menu page | User data & order data for the requested item number is appended to the worksheet 'order_list' and order status of the requested item is set to 'Processing'.| Works as expected |
+| Update order status | Enter 'C' from menu page | In worksheet 'order_list', order status for the items of the specific order id changes to 'Confirmed'.  | Works as expected |
+| Update order status | Enter 'Q' from menu page | In worksheet 'order_list', order status for the items of the specific order id changes to 'Cancelled'.  | Works as expected |
+
+4. As a site owner, I want users to receive feedback based on their input.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Welcome message invalid input | Enter an invalid option on Welcome screen  | User to be provided with feedback about invalid input | Works as expected  |
+| Order type options | User input on main page | Shows positive or negative feedback based on user input | Works as expected |
+| Menu | User input on menu page | Shows confirmation message for valid input and invalid message for invalid input | Works as expected |
+| Preview order | Add an item in the order list and then enter 'P' to go to preview | Preview page is shown with user inputs| Works as expected |
+| Receipt | Confirm user order on menu page | Upon order completion a formatted page of order summary is displayed | Works as expected  |
+| Quit | Enter 'Q' on menu page | User exits the app with a thank you message | Works as expected |
 
 
 ## Deployment

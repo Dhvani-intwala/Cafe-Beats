@@ -264,6 +264,7 @@ def user_action():
                 remove_item()
         elif food_item.capitalize() == "Q":
             # when user enter 'Q' then open thank you message.
+            append_order_status(food_item)
             thank_you()
             sleep(3)
             clear_screen()
@@ -275,6 +276,7 @@ def user_action():
                 sleep(3)
                 display_menu_list()
             else:
+                append_order_status(food_item)
                 complete_order()
             break
         else:
@@ -422,6 +424,7 @@ def complete_order():
                     colored("Please press 'Q' to quit. \n", "green")).strip()
         finish = finish.capitalize()
         if finish == "Q":
+            append_order_status(order_complete)
             clear_screen()
             thank_you()
             break
