@@ -371,7 +371,7 @@ def remove_item():
     worksheet = ORDER_LIST.get_all_values()
     removed_item = None
     for i, row in enumerate(worksheet):
-        for j, item in enumerate(row):
+        for item in row:
             if item == str(user_data[1]):
                 if row[4] == str(order_data[len(order_data) - 1]):
                     sleep(2)

@@ -33,9 +33,10 @@ The Cafe beats website has been developed to provide users the chance to order f
     2. [Future Implementations](#future-implementations)
 6. [Python Validation](#python-validation)
 7. [Testing](#testing)
-    1. [Device Testing](#device-testing)
-    2. [Browser Compatibility](#browser-compatibility)
-    3. [Manual Testing](#manual-testing)
+    1. [Browser Compatibility](#browser-compatibility)
+    2. [Manual Testing](#manual-testing)
+        - [Site user stories](#site-user-stories)
+        - [Site owner stories](#site-owner-stories)
 8. [Bugs](#bugs)
 9. [Deployment](#deployment)
 10. [Credits](#credits)
@@ -102,23 +103,13 @@ The Cafe beats app is for users who wish to place orders for home delivery / pic
 
 #### Welcome page
 
-Purpose: To greet users
-
-Description: On the Welcome page users are asked "Do you want to start your order now?". users will be provdied with 2 options. 
-
-- Yes
-- No
-
-Operation: when user select yes by entering Y, then the user is asked to "Enter your name". when users select no by entering N, then thanks for visting us page appears.
+The welcome page opens with the store name "The Cafe Beats". A welcome page greets the users and asked if they would like to make an order. Users will be provdided with 2 options: Yes and No. Selecting yes will take the user to the main screen while selecting no will exit the app.
 
 ----
 
 #### Main page
 
-Purpose: To ask the user to enter the user name, address, and choice of delivery type.
-
-Operation: after entering the user name, the user is asked the choice the order type, which is either home delivery or pick-up at the store, if the user selects home delivery by entering "d" then the user is asked to enter the address after entering address, menu page is displayed. And if the user select pick-up at the store by entering "p" then directly menu page is displayed.
-
+The purpose of the main page is to get the user details. Users are asked to provide their name and choice of delivery type. If a home delivery option is selected then home address is also asked.
 ----
 
 #### Menu Page
@@ -135,13 +126,18 @@ On the Menu page users are provided with a table format of the menu with the ran
 
 The preview page shows the user selected order list in a table format. The table shows the item details like item name and price. Also it provides user the option to return to the menu page by pressing "Y".
 
-#### confirm order page
+#### Confirm order page
 
 The user can confirm the order by entering "c", then confirm page is open where the user is asked "Are you ready to complete your order?" With two option's either the user can press "y" and confirm the order or the user can press "n" and again place the order.
 
 #### Receipt page
 
+When the user places the order then the receipt page opens where the user can see -
+user name, order ID, order type, address, item ordered, total price, and at what time the order will be ready.
 
+#### Thank you page
+
+From the receipt page, the user can quit by pressing "q" and then the thank you page appears where Thanks for visiting is being displaced.
 
 </details>
 
@@ -177,7 +173,7 @@ The following flowchart was created to help identify functions that would be req
 - Git - Used for version control.
 - GitHub - Used to deploy the projects code.
 - Gitpod - Used to develop and test code.
-- Smartdraw Used to create the project flow.
+- Smartdraw used to create the project flow.
 - Google Sheets - Used to store data outside of the program with the User data, food menu and sales records stored on separate worksheets.
 - Google Cloud Platform - Used to manage access permissions to google services such as google autho and google sheets.
 - Heroku Platform - Used to deploy the live project.
@@ -230,7 +226,7 @@ The welcome message invalid input feedback is featured on the welcome page and w
 #### User Name and delivery type option
 
 This page asks users to provide their name. Once user provies the name, a hi message displayed with user's name and devlivery type options. one option is home delivery and another is pickup.
-pickup will auto populate the address as 'The Pizza Hub'. For home delivery, customers will be asked to enter their address.
+pickup will auto populate the address as 'The Cafe Beats'. For home delivery, customers will be asked to enter their address.
 
 <details>
 <summary>User details type option</summary>
@@ -281,16 +277,26 @@ The Invalid item feature on the Menu page warns users that their previously ente
 ![screenshot-welcome-image]()
 </details>
 
-#### Empty order list warning 
+#### Preview order
+The preview order feature on the Menu page allows users to preview the items currently added to their order.
 
+#### Remove item
+The remove item feature on the menu page allows users to remove any selected item from user's order list.
 
+#### Confirm order
+The confirm order is a feature that will allow users to confirm the order and allows us to generate the receipt.
 
+#### Display order receipt
+This feature is displayed upon order completion. It includes all information which had been gathered throughout the process such as user name, delivery type, address and item ordered.
 
+#### Delivery charge
+This feature adds a delivery cost if the order is for delivery and adds nothing if it is for pickup.
 
+#### Display order / delivery time
+This feature displays the order time and delivery / pickup time on the order receipt.
 
-#### Quit 
-
-This feature is used throughout the app to allow the user to quit the app with a thank you message.
+#### Quit
+This feature is used to allow the user to quit the app with a thank you message.
 
 <details>
 <summary>Quit image</summary>
@@ -301,15 +307,21 @@ This feature is used throughout the app to allow the user to quit the app with a
 
 ### Future Implementations
 
-In the future as my skills grow I would like to implement the following features:
+In the future, I would like to implement the following features:
 
-- The user can also download a pdf and they will also receive an order confirmation email of what they have ordered.
-- The user can also write an feedback and review the food and service.
-- User can also make there own account and can login.
+- The user can also download a pdf and they will also receive an order confirmation email with a receipt.
+- The user can also write feedback and review food and services.
+- Users can also make their account and can log in.
+
+## Python Validation
+
+<details>
+<summary>Python file - run.py</summary>
+
+![screenshot-of-the-python-validator](Screenshot/validator-python1.png)
+</details>
 
 ## Testing 
-
-### Device Testing
 
 ### Browser Compatibility
 
@@ -320,7 +332,7 @@ The website was tested on the following web browsers:
 
 ### Manual Testing
 
-##### Testing User Stories Users
+##### Site User Stories
 
 1. As a user, I want to be provided with clear instructions throughout the app.
 
@@ -332,7 +344,7 @@ The website was tested on the following web browsers:
 
 | Feature       | Action        | Expected Result  | Actual Result |
 | ------------- | ------------- | -------------    | ------------- |
-| Order type options | Enter desired order type by entering D for home delivery or P for pickup | If order type Home Delivery is selected, the address is asked for | Works as expected |
+| Order type options | Enter desired order type by entering D for home delivery or P for pickup | If order type Home Delivery is selected then the address is asked | Works as expected |
 
 3. As a user, I want to view a clear and well-structed menu.
 
@@ -343,16 +355,31 @@ The website was tested on the following web browsers:
 4. As a user, I want to add an item to the order list. Additionally have the option to remove items from order list.
 
 
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Add item to order list | Enter item number on menu page | User input item to be validated and added to the order list with confirmation message |Works as expected |
+| Remove item from order list | From the menu page enter 'R' to remove the last item added to the order | User input item to be validated and removed from the order list with confirmation message |Works as expected |
+
+5. As a user, I want to be able to preview an order.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Preview order |From the menu enter 'P' to preview the order displaying all items previously added | User to be provided with a table of currently selected items for order  | Works as expected |
+
+6.  As a user, I want to be able to exit the app.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+|   Quit   |  Follow the process to complete an order, and from the Order Receipt display enter 'Q' to exit the app  | App to exit upon user entering Q and display and thank you message and the developers Social URLs     |Works as expected  |
+
+7. As a user, I want to be shown a receipt.
+
+| Feature       | Action        | Expected Result  | Actual Result |
+| ------------- | ------------- | -------------    | ------------- |
+| Display receipt  | From the menu enter 'C' to confirm the order. When prompted, confirm the order by selecting Y to View displayed Order receipt  | Upon order completion a formatted page of order summary will be displayed to the user   | Works as expected |
 
 
 
-## Python Validation
-
-<details>
-<summary>Python file - run.py</summary>
-
-![screenshot-of-the-python-validator](Screenshot/validator-python1.png)
-</details>
 
 ## Deployment
 This project was deployed to Heroku with following steps:
