@@ -369,7 +369,6 @@ def remove_item():
     """
     Function to pop the last item from the order list.
     """
-    clear_screen()
     worksheet = ORDER_LIST.get_all_values()
     removed_item = None
     for i, row in enumerate(worksheet):
@@ -380,11 +379,10 @@ def remove_item():
                     removed_item = row[5]
                     ORDER_LIST.delete_rows(i + 1)
                     break
-
     remove_str = f"\nYou have removed {removed_item} from your order"
     print(colored(remove_str, "yellow"))
     order_data.pop()
-    sleep(3)
+    sleep(2)
     clear_screen()
     display_menu_list(False)
 

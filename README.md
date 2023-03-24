@@ -110,6 +110,7 @@ The welcome page opens with the store name "The Cafe Beats". A welcome page gree
 #### Main page
 
 The purpose of the main page is to get the user details. Users are asked to provide their name and choice of delivery type. If a home delivery option is selected then home address is also asked.
+
 ----
 
 #### Menu Page
@@ -264,7 +265,7 @@ The Add item to order feature on the Menu page allows users to add an item to th
 <details>
 <summary>Add item to order image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-of-add-item-image](Screenshot/Add-item-list.png)
 </details>
 
 #### Invalid item for order
@@ -274,26 +275,62 @@ The Invalid item feature on the Menu page warns users that their previously ente
 <details>
 <summary>Invaild food item number image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Invaild-food-item-number-image](Screenshot/invaild-item-menu.png)
 </details>
 
 #### Preview order
 The preview order feature on the Menu page allows users to preview the items currently added to their order.
 
+<details>
+<summary>Preview order image</summary>
+
+![screenshot-Preview-order-image](Screenshot/previeworder.png)
+</details>
+
 #### Remove item
 The remove item feature on the menu page allows users to remove any selected item from user's order list.
+
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
 
 #### Confirm order
 The confirm order is a feature that will allow users to confirm the order and allows us to generate the receipt.
 
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
 #### Display order receipt
 This feature is displayed upon order completion. It includes all information which had been gathered throughout the process such as user name, delivery type, address and item ordered.
+
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
 
 #### Delivery charge
 This feature adds a delivery cost if the order is for delivery and adds nothing if it is for pickup.
 
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
+
 #### Display order / delivery time
 This feature displays the order time and delivery / pickup time on the order receipt.
+
+<details>
+<summary>Add item to order image</summary>
+
+![screenshot-welcome-image]()
+</details>
 
 #### Quit
 This feature is used to allow the user to quit the app with a thank you message.
@@ -301,7 +338,7 @@ This feature is used to allow the user to quit the app with a thank you message.
 <details>
 <summary>Quit image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Thank-you-message-image](Screenshot/Thank-you-msg.png)
 </details>
 
 
@@ -454,9 +491,10 @@ This project was deployed to Heroku with following steps:
 <summary>Screenshot</summary>
 <img src="Screenshot/Add-buildpack1.png">
 <img src="Screenshot/buildpack.png">
-</details
+</details>
 
 7. Go to the "deploy" tab and pick GitHub as a deployment method.
+
 <details>
 <summary>Screenshot</summary>
 <img src="Screenshot/deploy-method.png">
