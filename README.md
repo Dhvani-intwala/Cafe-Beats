@@ -291,45 +291,45 @@ The preview order feature on the Menu page allows users to preview the items cur
 The remove item feature on the menu page allows users to remove any selected item from user's order list.
 
 <details>
-<summary>Add item to order image</summary>
+<summary>Remove item image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-remove-item-image](Screenshot/remove-item.png)
 </details>
 
 #### Confirm order
 The confirm order is a feature that will allow users to confirm the order and allows us to generate the receipt.
 
 <details>
-<summary>Add item to order image</summary>
+<summary>Confirmation order image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Confirmation order image](Screenshot/complete-order.png)
 </details>
 
 #### Display order receipt
 This feature is displayed upon order completion. It includes all information which had been gathered throughout the process such as user name, delivery type, address and item ordered.
 
 <details>
-<summary>Add item to order image</summary>
+<summary>Display order receipt</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Display order receipt-image](Screenshot/reciept.png)
 </details>
 
 #### Delivery charge
 This feature adds a delivery cost if the order is for delivery and adds nothing if it is for pickup.
 
 <details>
-<summary>Add item to order image</summary>
+<summary>Display delivery charge image </summary>
 
-![screenshot-welcome-image]()
+![screenshot-Display delivery charge image](Screenshot/reciept.png)
 </details>
 
 #### Display order / delivery time
 This feature displays the order time and delivery / pickup time on the order receipt.
 
 <details>
-<summary>Add item to order image</summary>
+<summary>Display order / delivery time image</summary>
 
-![screenshot-welcome-image]()
+![screenshot-Display order / delivery time-image](Screenshot/reciept.png)
 </details>
 
 #### Quit
