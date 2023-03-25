@@ -52,7 +52,7 @@ The Cafe beats website has been developed to provide users the chance to order f
 - Be able to add and remove items from an order prior to order confirmation.
 - Be able to cancel the order.
 - The ability to preview their order.
-- Be able to quit the app from any page.
+- Be able to quit the app.
 
 ### Site Owner Goals
 
@@ -83,7 +83,7 @@ The Cafe beats website has been developed to provide users the chance to order f
 - As a user, I want to be able to preview an order.
 - As a user, I want to be able to cancel an unplaced order.
 - As a user, I want to be able to place an order.
-- As a user, I want to be shown a receipt.
+- As a user, I want to be able to see a receipt.
 - As a user, I want to be able to exit the app.
 
 ### Site Owner Stories
@@ -103,7 +103,7 @@ The Cafe beats app is for users who wish to place orders for home delivery / pic
 
 #### Welcome page
 
-The welcome page opens with the store name "The Cafe Beats". A welcome page greets the users and asked if they would like to make an order. Users will be provdided with 2 options: Yes and No. Selecting yes will take the user to the main screen while selecting no will exit the app.
+The welcome page opens with the store name "The Cafe Beats". A welcome page greets the users and asked if they would like to make an order. Users will be provdided with 2 options: Yes and No. Selecting yes will take the user to the main page while selecting no will exit the app.
 
 ----
 
@@ -125,7 +125,7 @@ On the Menu page users are provided with a table format of the menu with the ran
 
 #### Preview page
 
-The preview page shows the user selected order list in a table format. The table shows the item details like item name and price. Also it provides user the option to return to the menu page by pressing "Y".
+The preview page shows the user selected order list in a table format. The table shows the item details with item name and price. Also it provides user the option to return to the menu page by pressing "Y".
 
 #### Confirm order page
 
@@ -154,7 +154,7 @@ The following flowchart was created to help identify functions that would be req
 
 <details><summary>Overview</summary>
 
-![flowchart-screenshot-image](Screenshot/flowchart-final2.png)
+![flowchart-screenshot-image](Screenshot/flowchart.png)
 </details>
 
 ### Data Models
