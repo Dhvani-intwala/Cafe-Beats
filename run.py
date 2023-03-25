@@ -187,6 +187,7 @@ def display_menu_list(is_useraction_required=True, food_item_selected=-1):
     Fetches the cafe beats menu from google sheets worksheet 'menu' and
     displays it in formatted table form to user.
     """
+    clear_screen()
     display_menu = MENU.get_all_values()
     print(tabulate(display_menu))
     print(DISPLAY_MENU_MSG)
