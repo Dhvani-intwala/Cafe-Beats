@@ -6,7 +6,7 @@
 
 The Cafe beats website has been developed to provide users the chance to order food for delivery or pick-up via a command line based interface.
 
-[View live website]()
+[View live website](https://cafe-beats.herokuapp.com/)
 
 
 # Table of Contents
@@ -174,7 +174,7 @@ The following flowchart was created to help identify functions that would be req
 - Git - Used for version control.
 - GitHub - Used to deploy the projects code.
 - Gitpod - Used to develop and test code.
-- Smartdraw used to create the project flow.
+- diagrams.net - used to create the project flow.
 - Google Sheets - Used to store data outside of the program with the User data, food menu and sales records stored on separate worksheets.
 - Google Cloud Platform - Used to manage access permissions to google services such as google autho and google sheets.
 - Heroku Platform - Used to deploy the live project.
@@ -226,8 +226,8 @@ The welcome message invalid input feedback is featured on the welcome page and w
 
 #### User Name and delivery type option
 
-This page asks users to provide their name. Once user provies the name, a hi message displayed with user's name and devlivery type options. one option is home delivery and another is pickup.
-pickup will auto populate the address as 'The Cafe Beats'. For home delivery, customers will be asked to enter their address.
+This page asks users to provide their name. Once user provies the name, a hi message displayed with user's name and delivery type options. one option is home delivery and another is pickup.
+Pickup will auto populate the address as 'The Cafe Beats'. For home delivery, customers will be asked to enter their address.
 
 <details>
 <summary>User details type option</summary>
@@ -256,6 +256,7 @@ The Menu feature will display a tabulated format of all items available for orde
 <summary>Menu image</summary>
 
 ![screenshot-menu-list-image](Screenshot/Menu-list.png)
+![screenshot-menu-list-options-image](Screenshot/menu-options.png)
 </details>
 
 #### Add item to order
@@ -273,9 +274,9 @@ The Add item to order feature on the Menu page allows users to add an item to th
 The Invalid item feature on the Menu page warns users that their previously entered input is not valid.
 
 <details>
-<summary>Invaild food item number image</summary>
+<summary>Invalid food item number image</summary>
 
-![screenshot-Invaild-food-item-number-image](Screenshot/invaild-item-menu.png)
+![screenshot-Invalid-food-item-number-image](Screenshot/invaild-item-menu.png)
 </details>
 
 #### Preview order
@@ -375,9 +376,9 @@ The website was tested on the following web browsers:
 
 | Feature       | Action        | Expected Result  | Actual Result |
 | ------------- | ------------- | -------------    | ------------- |
-| All listed features in the Features section provide the user with feedback based on user input | As prompted, enter user input | User to be provided with positive and negative feedback based on user input | Works as expected |
+| All listed features in the features section provide the user with feedback based on user input | As prompted, enter user input | User to be provided with positive and negative feedback based on user input | Works as expected |
 
-2. As a user, I should get an option to choose my order between pickup or home delivery.
+2. As a user, I should get an option to choose my order type between pickup or home delivery.
 
 | Feature       | Action        | Expected Result  | Actual Result |
 | ------------- | ------------- | -------------    | ------------- |
@@ -407,7 +408,7 @@ The website was tested on the following web browsers:
 
 | Feature       | Action        | Expected Result  | Actual Result |
 | ------------- | ------------- | -------------    | ------------- |
-|   Quit   |  Follow the process to complete an order, and from the Order Receipt display enter 'Q' to exit the app  | App to exit upon user entering Q and display and thank you message and the developers Social URLs     |Works as expected  |
+|   Quit   |  Follow the process to complete an order, and from the Order Receipt display enter 'Q' to exit the app ,and also by pressing q on the menu page the user can quit the app | App to exit upon user entering Q and display thank you message and the developers Social URLs     |Works as expected  |
 
 7. As a user, I want to be shown a receipt.
 
@@ -460,7 +461,7 @@ The website was tested on the following web browsers:
 
 ## Deployment
 This project was deployed to Heroku with following steps:
-1. Use the "pip freeze -> requiremnts.txt" command in the terminal to save any libraries that need to be installed in the file.
+1. Use the "pip freeze -> requirements.txt" command in the terminal to save any libraries that need to be installed in the file.
 2. Navigate to https://www.heroku.com/ and login or create an account. 
 3. Click the "new" button in the upper right corner and select "create new app".
 <details>
