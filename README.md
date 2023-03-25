@@ -461,7 +461,7 @@ The website was tested on the following web browsers:
 
 ## Unsolved Bugs
 
-In Gitpod terminal everything works as expected but after deploying, an unknown error occurred after removing an item from the order. The menu items table is appearing more than 1 times. But the programs run properlly.
+In Gitpod terminal everything works as expected but after deploying, an unknown error occurred, the menu items table is appearing more than 1 times. But the programs run properlly.
 
 ![screenshot-unsolved-bug-image](Screenshot/Unsolved-Bugs.png)
 
