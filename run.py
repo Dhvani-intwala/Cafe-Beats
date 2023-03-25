@@ -254,12 +254,13 @@ def user_action():
                 preview_order()
         elif food_item.capitalize() == "R":
             if len(order_data) == 0:
-                clear_screen()
-                print(display_menu_list)
                 print(
                     colored("\nNothing to remove, basket" " is empty",
                             "yellow")
                 )
+                sleep(2)
+                clear_screen()
+                display_menu_list()
             else:
                 remove_item()
         elif food_item.capitalize() == "Q":
