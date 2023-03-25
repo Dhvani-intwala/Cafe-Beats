@@ -38,9 +38,10 @@ The Cafe beats website has been developed to provide users the chance to order f
         - [Site user stories](#site-user-stories)
         - [Site owner stories](#site-owner-stories)
 8. [Bugs](#bugs)
-9. [Deployment](#deployment)
-10. [Credits](#credits)
-11. [Acknowledgements](#acknowledgements)
+9. [Unsolved Bugs](#unsolved-bugs)
+10. [Deployment](#deployment)
+11. [Credits](#credits)
+12. [Acknowledgements](#acknowledgements)
 
 
 ## Project Goals
@@ -458,6 +459,11 @@ The website was tested on the following web browsers:
 | When user removes an item on menu page, local variable order Id was not matching with worksheet Order ID | In remove item function  earlier row[J+4] was written and then it was changed to row[4] ,reason for doing this was to access the 4th element from the list|
 | Append order confirmation function updates order status for only one item instead of all the items for the specific user in the worksheet 'order_list'  | Use findall function instead of find function for finding user specific order data  |
 
+## Unsolved Bugs
+
+In Gitpod terminal everything works as expected but after deploying, an unknown error occurred after removing an item from the order. The menu items table is appearing more than 1 times. But the programs run properlly.
+
+![screenshot-unsolved-bug-image](Screenshot/Unsolved-Bugs.png)
 
 ## Deployment
 This project was deployed to Heroku with following steps:
